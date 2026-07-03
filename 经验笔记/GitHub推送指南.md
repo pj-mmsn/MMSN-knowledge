@@ -138,3 +138,96 @@ credentials.json
 ```
 
 然后 `git add -A` 会自动跳过这些文件。
+
+---
+
+## 2026-07-04 ⚠ gh CLI 在 Git Bash 中的路径陷阱
+
+**场景**：在 Git Bash（或 ZCode 的 Bash 环境）中直接敲 `gh`，报 `command not found`，但实际上 `gh.exe` 已通过 winget 安装在 `C:\Program Files\GitHub CLI\`。
+
+**根因**：Git Bash 的 PATH 继承自 Windows 系统 PATH，但 ZCode/Agent 的 Bash 会话可能没有完整继承。`C:\Program Files\GitHub CLI` 虽然在系统 PATH 里，但 Git Bash 不一定能解析到。
+
+**结论**：别依赖 `gh` 简短命令。直接用完整路径：
+
+```bash
+"/c/Program Files/GitHub CLI/gh" repo list
+"/c/Program Files/GitHub CLI/gh" auth status
+```
+
+或者先定位：
+
+```bash
+cmd.exe //c "where gh"    # 从 Windows cmd 查找
+ls "/c/Program Files/GitHub CLI/gh.exe"   # 直接验证默认路径
+```
+
+**关键命令**：
+```bash
+# 验证 gh 可用
+"/c/Program Files/GitHub CLI/gh" --version
+
+# 创建仓库（必须用完整路径）
+"/c/Program Files/GitHub CLI/gh" repo create pj-mmsn/项目名 --public
+
+# 查看认证状态
+"/c/Program Files/GitHub CLI/gh" auth status
+```
+
+> **为什么不用 `export PATH`？** 因为 ZCode 每个 Bash 调用是独立会话，shell 状态不持久化，export 不会保留到下次调用。每次都用完整路径最稳妥。
+
+---
+
+## 2026-07-04 多项目批量上传到 GitHub
+
+**场景**：`E:\AI项目` 下面有两个项目 `ai-agent-java` 和 `ai-agent-starter`，需要分别创建独立仓库并推送。
+
+**结论**：标准流程——建仓 → 初始化 git → 加 .gitignore → 推送。多个项目可以并行操作。
+
+**完整流程**（以两个项目为例）：
+
+```bash
+# 第1步：并行创建两个空仓库（互不依赖，可同时跑）
+"/c/Program Files/GitHub CLI/gh" repo create pj-mmsn/ai-agent-java --public
+"/c/Program Files/GitHub CLI/gh" repo create pj-mmsn/ai-agent-starter --public
+
+# 第2步：分别初始化并推送（各自独立，可并行）
+cd "E:/AI项目/ai-agent-java" && \
+  git init && git add -A && \
+  git commit -m "init: ai-agent-java 项目初始化" && \
+  git remote add origin https://github.com/pj-mmsn/ai-agent-java.git && \
+  git branch -M main && git push -u origin main
+
+cd "E:/AI项目/ai-agent-starter" && \
+  git init && git add -A && \
+  git commit -m "init: ai-agent-starter 项目初始化" && \
+  git remote add origin https://github.com/pj-mmsn/ai-agent-starter.git && \
+  git branch -M main && git push -u origin main
+```
+
+**踩坑记录**：
+
+1. **`gh repo create --source=. --push` 报错 "not a git repository"**：这个命令要求目标目录已经是 git 仓库。如果目录还没 `git init`，必须分两步走——先 `gh repo create` 建空仓，再手动 `git init → add → commit → push`。
+
+2. **不要忘了 .gitignore**：推送前检查有没有 `.gitignore`，否则 `target/`、`.venv/`、`.env`、`__pycache__/` 这些全会被推上去。按项目类型自动生成（见下方模板）。
+
+3. **多个项目可以并行**：建仓互不依赖，推送也互不依赖——可以同时开两个 bash 调用来加速。
+
+---
+
+## 按项目类型生成 .gitignore
+
+推送项目前，先判断项目类型，自动生成合适的 `.gitignore`：
+
+| 判断依据 | 项目类型 | 应排除 |
+|----------|----------|--------|
+| 有 `pom.xml` / `build.gradle` | Java / Maven | `target/`, `.idea/`, `*.class`, `*.jar` |
+| 有 `requirements.txt` / `setup.py` | Python | `__pycache__/`, `.venv/`, `*.pyc` |
+| 有 `package.json` | Node.js | `node_modules/`, `dist/` |
+| 以上都没有 | 通用 | `.idea/`, `.vscode/`, `.env`, `.DS_Store` |
+
+**.env 文件铁律**：`.env` 绝不应提交（含 API Key 等密钥）。项目应提供 `.env.example` 作为模板，在 README 中说明用户需要复制并填写自己的密钥。
+
+**相关**：
+- 知识库同步：`knowledge-sync` 技能
+- 单文件上传：`github-upload` 技能（场景 A）
+- 技能目录：`C:\Users\Administrator\.agents\skills\github-upload\`
