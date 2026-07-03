@@ -16,6 +16,11 @@ import sys
 import datetime
 import os
 
+# gh CLI 可能不在子进程 PATH 里(winget 安装后生效需要新终端)
+GH_PATH = r"C:\Program Files\GitHub CLI"
+if os.path.isdir(GH_PATH) and GH_PATH not in os.environ.get("PATH", ""):
+    os.environ["PATH"] = GH_PATH + os.pathsep + os.environ.get("PATH", "")
+
 KB = r"E:\知识库"
 
 
