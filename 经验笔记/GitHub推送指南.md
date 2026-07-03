@@ -84,6 +84,28 @@ gh auth status    # 应显示你的 GitHub 用户名
 gh repo list      # 列出你的仓库
 ```
 
+### 配置代理(国内环境必需)
+
+gh CLI 走系统代理通常自动生效,但 **git 需要单独配代理**才能 push/pull:
+
+```bash
+# Clash 默认端口 7890,其他梯子换成对应端口
+git config --global http.proxy http://127.0.0.1:7890
+git config --global https.proxy http://127.0.0.1:7890
+
+# 验证
+git config --global --get http.proxy
+```
+
+如果哪天直连恢复了,取消代理:
+
+```bash
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+
+> **为什么 `gh repo create` 能成功但 `git push` 会超时?** 因为 gh CLI 用的是 Windows 系统代理,git 用的是自己的配置,两者独立。
+
 ---
 
 ## 常用命令速查
