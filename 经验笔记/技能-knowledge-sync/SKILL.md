@@ -33,10 +33,11 @@ python C:/Users/Administrator/.agents/skills/knowledge-sync/scripts/sync.py "新
 1. 检查 `E:\知识库` 是否是 git 仓库、是否有关联远程
 2. 检查 git 代理是否已配(没配会提示错误和修复命令)
 3. **检查根目录是否有 `README.md`,没有则自动生成**(根据目录结构生成基础模板)
-4. `git add -A` 暂存所有变更
-5. 自动生成中文提交消息(如 `sync: 经验笔记(Spring报错笔记.md); Java手册(2个文件)`)
-6. `git commit` + `git push`
-7. 打出来 GitHub 仓库链接
+4. **技能自备份:把 `sync.py` 和 `SKILL.md` 最新版同步到 `经验笔记/技能-knowledge-sync/`**,确保技能代码跟知识库一起版本管理
+5. `git add -A` 暂存所有变更
+6. 自动生成中文提交消息(如 `sync: 经验笔记(Spring报错笔记.md); Java手册(2个文件)`)
+7. `git commit` + `git push`
+8. 打出来 GitHub 仓库链接
 
 如果没有任何变更,脚本会输出"没有新变更,无需推送"并退出。
 
