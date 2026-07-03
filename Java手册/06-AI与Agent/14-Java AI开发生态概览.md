@@ -112,6 +112,13 @@ graph TB
     style QW fill:#C8E6C9,stroke:#388E3C
 ```
 
+## 项目代码参考
+
+| 代码文件 | 演示的概念 |
+|---------|-----------|
+| `agent-project-java/pom.xml` | Spring AI / RestTemplate 依赖配置 |
+| `agent-project-java/.../controller/AgentController.java` | 纯 Java Agent 实现 |
+
 ## 参考来源
 
 - Spring AI 官网: https://spring.io/projects/spring-ai

@@ -186,6 +186,7 @@ flowchart TD
 | 🆕 Java 向量数据库与 RAG | [17-Java向量数据库与RAG](06-AI与Agent/17-Java向量数据库与RAG.md) | ✅ |
 | 🆕 Java AI 项目实战模式 | [18-Java AI项目实战模式](06-AI与Agent/18-Java AI项目实战模式.md) | ✅ |
 | 🆕 Agent 开发环境搭建指南 | [19-Agent开发环境搭建指南](06-AI与Agent/19-Agent开发环境搭建指南.md) | ✅ |
+| 🆕 知识与代码双向映射 | [20-知识与代码双向映射](06-AI与Agent/20-知识与代码双向映射.md) | ✅ |
 
 > **阅读建议**:
 > - **AI 基础路线**: 12 → 01 → 06 → 04 → 03 → 05 → 07 → 08 → 09

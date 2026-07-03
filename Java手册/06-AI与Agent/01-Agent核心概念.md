@@ -237,6 +237,17 @@ if __name__ == "__main__":
   - "如何控制 Agent 不跑偏？" → Prompt 约束、最大步数限制、输出格式限制、人工审批节点
   - "Agent 的成本怎么优化？" → 缓存、小模型做大分类+大模型做复杂推理、减少不必要的工具调用
 
+## 项目代码参考
+
+本文概念在两个 Agent 项目中都有对应实现：
+
+| 代码文件 | 对应函数/类 | 演示的概念 |
+|---------|------------|-----------|
+| `agent-project-py/src/agent_core.py` | `run_agent()` | 最小 Agent 循环 + 工具调用 |
+| `agent-project-java/.../controller/AgentController.java` | `runAgent()` | Java版 ReAct Agent |
+
+> 📍 完整映射见 `20-知识与代码双向映射.md`
+
 ## 参考来源
 
 - OpenAI Function Calling 文档: https://platform.openai.com/docs/guides/function-calling

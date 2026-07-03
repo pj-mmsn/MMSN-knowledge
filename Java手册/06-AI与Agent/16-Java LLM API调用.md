@@ -308,6 +308,13 @@ public class LLMService {
 - **误区2**: "Java 不能流式输出" —— 可以。`WebClient` + SSE 完美支持。原理是逐行读取 HTTP 响应的 `data:` 事件。
 - **误区3**: "Java AI 性能比 Python 差" —— Agent 的瓶颈永远在 LLM API 延迟上（2-5秒），和语言无关。Java 在并发处理和内存效率上反而有优势。
 
+## 项目代码参考
+
+| 代码文件 | 对应函数/类 | 演示的概念 |
+|---------|------------|-----------|
+| `agent-project-java/.../service/LLMService.java` | `chatWithSystem()` | Java RestTemplate 调 DeepSeek API |
+| `agent-project-java/.../controller/AIController.java` | `chat()` | 对外暴露的聊天 API |
+
 ## 参考来源
 
 - OpenAI API 文档: https://platform.openai.com/docs/api-reference

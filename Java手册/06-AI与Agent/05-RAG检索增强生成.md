@@ -236,6 +236,17 @@ if __name__ == "__main__":
   - "检索不精准怎么办？" → ① 重排序（Reranker）② 混合检索（BM25 + 向量）③ 调整 chunk 大小
   - "RAG 和 Agent 的关系？" → RAG 是 Agent 记忆层的一种实现方式，Agent 可能用 RAG 检索知识，也可能用其他方式
 
+## 项目代码参考
+
+本文的 RAG 实现在 Python Agent 项目中：
+
+| 代码文件 | 对应函数/类 | 演示的概念 |
+|---------|------------|-----------|
+| `agent-project-py/src/agent_rag.py` | `MiniRAG` | 完整 RAG 系统（文档→向量→检索→生成） |
+| `agent-project-py/src/agent_rag.py` | `MiniRAG.query()` | 语义检索 + LLM 生成 |
+
+> 📍 完整映射见 `20-知识与代码双向映射.md`
+
 ## 参考来源
 
 - LangChain RAG 文档: https://python.langchain.com/docs/tutorials/rag/
