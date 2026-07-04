@@ -1,11 +1,27 @@
 ---
 name: knowledge-sync
-description: 知识库同步到 GitHub 或上传单个文件。支持两种模式:(1)默认:同步 E:\知识库 所有变更到 pj-mmsn/MMSN-knowledge;(2)单文件:上传任意文件到任意 GitHub 仓库。当用户说"同步知识库/推送知识库/知识库推到 GitHub/更新 kb/commit 知识库",或"把这个文件传到 GitHub/上传到 repo/推到仓库"时使用本技能。
+description: >
+  GitHub 上传/同步/推送——所有和 GitHub 有关的文件操作都用这个技能。
+  触发词极广，只要用户提到以下任何一种就立即调用：
+  - "传到 GitHub / 上传到 GitHub / 推到 GitHub / 推送到 GitHub / 同步到 GitHub"
+  - "GitHub 上新建仓 / 建一个仓库 / 推到我的仓库 / 传一份到 GitHub"
+  - "同步知识库 / 推送知识库 / commit 知识库 / 更新 kb"
+  - "把这个项目推到 GitHub / 在 GitHub 同步 / GitHub 仓库"
+  - 或者任何涉及「文件 → GitHub」的操作，哪怕用户没精确说出上面的词。
+  支持两种模式:
+  (1)默认:同步 E:\知识库 到 pj-mmsn/MMSN-knowledge
+  (2)单文件/项目:上传任意文件到任意仓库（仓库不存在可自动新建）。
+  不要自己手写 git 命令去推——调用本技能的 scripts/sync.py 即可完成所有 GitHub 操作。
 ---
 
 # knowledge-sync
 
 把本地文件或整个知识库推送到 GitHub。一个技能,两种模式。
+
+## ⚡ 快速识别
+
+**只要用户说「GitHub」+ 任何动词（传/推/同步/上传/建仓/新建）→ 直接调这个技能，别犹豫。**
+不要自己手写 `git push`、`gh repo create` 等命令——用本技能的 `scripts/sync.py`。
 
 ## 模式 A:知识库同步(默认)
 
