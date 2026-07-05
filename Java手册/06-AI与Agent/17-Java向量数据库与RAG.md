@@ -329,3 +329,17 @@ public class LocalVectorStore implements AutoCloseable {
 - pgvector 文档: https://github.com/pgvector/pgvector
 - JVector GitHub: https://github.com/jvector/jvector
 - 相关笔记: `Java手册/06-AI与Agent/15-Spring AI实战.md`
+
+## 什么时候不需要向量数据库
+
+> 2026 年 1M Token 上下文窗口改变了游戏规则。
+
+| 场景 | 推荐方案 | 原因 |
+|------|---------|------|
+| 全文 < 500K tokens | 直接塞 context | 比检索更准确，无碎片化 |
+| 需要全局连贯性 | 全文入 context | 向量检索是碎片化的 |
+| 串行阅读/创作 | 全文入 context | 不需要随机检索 |
+| 知识库 > 1M tokens | 向量数据库 + RAG | 超出窗口必须检索 |
+| 精确片段查询 | 向量数据库 | "第三章主角说了什么" |
+
+**原则**：1M 窗口让"全文直塞"成为很多场景的最优解——更简单、更准确、零额外依赖。向量数据库只在真正超出窗口时才需要。

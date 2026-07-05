@@ -169,3 +169,27 @@ for message in result.messages:
 - CrewAI 文档: https://docs.crewai.com
 - Magentic-One 论文: https://arxiv.org/abs/2410.03314
 - 相关笔记: `Java手册/06-AI与Agent/07-框架对比与选型.md`
+
+## 2026 年关键更新：MCP 与 A2A 协议
+
+> 详见经验笔记：[Agent框架选型-2026](../../经验笔记/AI-Agent/项目实战/Agent框架选型-2026.md)
+
+### 两大核心协议
+
+| 协议 | 发起方 | 连接对象 | 定位 |
+|------|--------|---------|------|
+| **MCP** | Anthropic | Agent ↔ 工具/数据 | AI 的"USB-C 接口" |
+| **A2A** | Google | Agent ↔ Agent | "智能体间的对讲机" |
+
+**MCP + A2A 互补而非竞争**：MCP 给 Agent 工具，A2A 给 Agent 彼此。生产级系统通常两者并用。
+
+### 什么时候不需要多 Agent？
+
+| 场景 | 推荐 |
+|------|------|
+| 串行流水线（构思→大纲→写作） | **单体 Agent** — 不需要并行协作 |
+| 不需要外部工具调用 | **单体 Agent** — MCP 是多余的 |
+| 上下文能全塞进窗口（<1M tokens） | **单体 Agent** — 不需要 RAG |
+| 单个开发者维护 | **单体 Agent** — 多 Agent 增加运维成本 |
+
+**原则**：先有一个能用的单体 Agent，再考虑拆分成多 Agent。不要为了用框架而用框架。
