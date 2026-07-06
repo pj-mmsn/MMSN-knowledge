@@ -1,0 +1,195 @@
+{
+  "main": {
+    "id": "4def4f55fc4ca4e3",
+    "type": "split",
+    "children": [
+      {
+        "id": "6bb9c3ef6c1cd9af",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cee8969a0c8c9e1a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "04-Python知识/01-Python速成-Java工程师视角.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01-Python速成-Java工程师视角"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "026e39929557a378",
+    "type": "split",
+    "children": [
+      {
+        "id": "ec25a7245b7e76b5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a981e9d429e055c6",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "736983983d9deb80",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "70db6f1e779b28d0",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "0ed0d113eb28035b",
+    "type": "split",
+    "children": [
+      {
+        "id": "15a8bad5abe71c81",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "29ff19481ff1b72c",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "04-Python知识/01-Python速成-Java工程师视角.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "01-Python速成-Java工程师视角 的反向链接列表"
+            }
+          },
+          {
+            "id": "9b83067c5c6080b9",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "04-Python知识/01-Python速成-Java工程师视角.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "01-Python速成-Java工程师视角 的出链列表"
+            }
+          },
+          {
+            "id": "0412f45f5f2eac38",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "26b9a3622855f66d",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "a25c75c795d143da",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "04-Python知识/01-Python速成-Java工程师视角.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "01-Python速成-Java工程师视角 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "cee8969a0c8c9e1a",
+  "lastOpenFiles": [
+    "03-经验笔记/学习计划/8周Agent学习计划.md",
+    "03-经验笔记/学习计划",
+    "01-AI知识/01-Agent核心/01-Agent核心概念.md",
+    "README.md",
+    "新建文件夹",
+    "未命名.base"
+  ]
+}
