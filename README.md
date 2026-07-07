@@ -1,34 +1,72 @@
 # MMSN 知识库
 
-个人的技术知识沉淀仓库，涵盖 Java 后端、AI/Agent、面试准备等方向。
+> 个人第二大脑 — 按 **PARA 方法**组织，LLM 辅助维护
 
-## 目录
+---
+
+## PARA 结构
 
 ```
-├── Java手册/          # Java 核心体系笔记
-│   ├── 00-Python基础/       # Python 速成(Java 工程师视角)
-│   ├── 01-java核心/          # 基础、集合、并发、JVM
-│   ├── 02-数据库/            # MySQL、Redis
-│   ├── 03-框架/              # Spring IoC/AOP
-│   ├── 04-分布式与高可用/    # CAP、BASE
-│   └── 06-AI与Agent/         # Agent 概念、RAG、LangChain、Spring AI
+E:\知识库\
 │
-├── 经验笔记/          # 实战踩坑与解决方案
-│   ├── AI-Agent/             # Agent 开发实战记录
-│   ├── spring/               # Spring 启动报错等
-│   └── GitHub推送指南.md      # 知识库推送到 GitHub 的完整教程
+├── 01-Projects/         🟢 活跃项目（有目标、进行中）
+│   └── 8周Agent学习计划
 │
-├── JavaGuide/         # JavaGuide 参考(子模块)
+├── 02-Areas/            🔵 持续积累的技术领域（你的"能力圈"）
+│   ├── AI与Agent/       25篇 — Agent理论 → 框架 → 运维
+│   ├── Java/            21篇 — 基础/并发/JVM/数据库/框架
+│   └── Python/           6篇 — Java工程师视角速成
 │
-└── 面试资料/          # AI 大模型面试题等
+├── 03-Resources/        🟡 外部参考资料（只读为主）
+│   ├── JavaGuide/       470+篇 Java全栈开源参考
+│   ├── AI前沿追踪/      时效性内容，定期刷新
+│   └── 工具指南/        Git/GitHub操作指南
+│
+├── 04-Archives/         ⚫ 已完成的项目（经验可复用）
+│   ├── AI小说家         PyQt5桌面AI写作工具
+│   ├── 从零构建Agent    Python+Java双轨踩坑
+│   ├── 视频工作室        Multi-Agent协作
+│   └── Agent框架选型-2026
+│
+└── 05-经验日志/         📝 踩坑记录（按时间/主题）
+    ├── Prompt工程实战
+    ├── RAG企业级落地
+    ├── 实战场景与解决方案（14种场景）
+    └── Spring启动报错
 ```
 
-## 同步方式
+---
 
-配置了 `knowledge-sync` 技能，在 ZCode 里说 "同步知识库" 即可一键 `git add → commit → push`。
+## 使用方式
 
-```bash
-# 或手动执行
-cd E:/知识库
-git add -A && git commit -m "更新" && git push
-```
+| 你想做的事 | 怎么做 |
+|-----------|--------|
+| 学习某个技术点 | 去 `02-Areas/` 找对应领域 |
+| 排查一个报错 | 先查 `05-经验日志/`，再查 `02-Areas/` 相关笔记 |
+| 做一个新项目 | 在 `01-Projects/` 建计划，完成后归档到 `04-Archives/` |
+| 沉淀经验 | 对 ZCode 说"记下来"，LLM 自动归入对应目录 |
+| 同步到 GitHub | 对 ZCode 说"同步知识库" |
+
+---
+
+## PARA 四类怎么区分
+
+| 类型 | 判断标准 | 示例 |
+|------|---------|------|
+| **Project** | 有截止日期、有明确产出 | "8周学完Agent" |
+| **Area** | 持续维护、没有终点 | "Java后端开发"、"AI Agent技术" |
+| **Resource** | 别人的东西、未来可能用到 | JavaGuide、官方文档摘要 |
+| **Archive** | 已完成、不再活跃 | 做完的项目、过时的笔记 |
+
+---
+
+## 维护
+
+本知识库由 **knowledge-loop** 技能驱动 LLM 自动维护：
+- 每次沉淀自动更新 `_index.md` 索引
+- 每次写入自动校验链接有效性
+- 超过 30 天未更新的项目提示归档检查
+
+---
+
+*最后更新: 2026-07-07*
