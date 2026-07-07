@@ -18,4 +18,12 @@
 
 ---
 
-*最后更新: 2026-07-07 | 共 6 篇笔记*
+## 关联领域
+
+- 🤖 [AI与Agent 索引](../AI与Agent/_index.md) — Python AI 开发实战（LangChain、LangGraph、Multi-Agent）
+- ☕ [Java 索引](../Java/_index.md) — 你的主力语言，AI 集成到 Java 系统
+- 📡 [AI前沿追踪](../../03-Resources/AI前沿追踪/) — 时效性内容，定期刷新
+
+---
+
+*最后更新: 2026-07-08 | 共 6 篇笔记*
