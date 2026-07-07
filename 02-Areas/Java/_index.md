@@ -57,6 +57,7 @@
 - 🤖 [AI与Agent 索引](../AI与Agent/_index.md) — Java AI 开发（Spring AI、LLM调用、向量数据库）
 - 🐍 [Python 索引](../Python/_index.md) — AI 主力语言，Java 工程师速成路径
 - 📖 [JavaGuide](../../03-Resources/JavaGuide/) — 470+ 篇 Java 全栈参考（只读）
+- 📝 [经验日志](../../05-经验日志/_index.md) — Spring 启动报错等踩坑记录
 
 ---
 

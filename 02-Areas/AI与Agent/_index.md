@@ -54,6 +54,8 @@ AI 开发需要多技术栈配合，以下领域索引与本目录互补：
 - 🐍 [Python 索引](../Python/_index.md) — AI 开发主力语言，6篇速成笔记（Java 工程师视角）
 - ☕ [Java 索引](../Java/_index.md) — 给已有 Java 系统集成 AI 能力，21篇核心知识
 - 📡 [AI前沿追踪](../../03-Resources/AI前沿追踪/) — 时效性内容，定期刷新
+- 📦 [项目归档](../../04-Archives/_index.md) — AI小说家、从零构建Agent 等 4 个项目复盘
+- 📝 [经验日志](../../05-经验日志/_index.md) — Prompt实战、RAG落地、14种场景速查
 
 ---
 

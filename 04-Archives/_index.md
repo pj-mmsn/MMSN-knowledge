@@ -13,6 +13,19 @@
 | [视频工作室](视频工作室.md) | 2026 | Multi-Agent | 多 Agent 协作视频制作流程 |
 | [Agent框架选型-2026](Agent框架选型-2026.md) | 2026 | 技术调研 | 2026年主流 Agent 框架对比 |
 
+## 关联知识
+
+每个项目都用到了 `02-Areas/` 中的知识，复盘时可按图索骥：
+
+| 项目 | 涉及知识点 |
+|------|-----------|
+| AI小说家 | [Prompt工程](../02-Areas/AI与Agent/Prompt工程.md)、[工具调用](../02-Areas/AI与Agent/工具调用.md)、[记忆系统](../02-Areas/AI与Agent/记忆系统.md) |
+| 从零构建Agent | [Agent核心概念](../02-Areas/AI与Agent/Agent核心概念.md)、[规划与推理](../02-Areas/AI与Agent/规划与推理.md)、[部署与运维](../02-Areas/AI与Agent/部署与运维.md) |
+| 视频工作室 | [Multi-Agent多智能体](../02-Areas/AI与Agent/Multi-Agent多智能体.md)、[Prompt工程](../02-Areas/AI与Agent/Prompt工程.md) |
+| Agent框架选型-2026 | [框架对比与选型](../02-Areas/AI与Agent/框架对比与选型.md) |
+
+- 📝 踩坑记录见 [05-经验日志](../05-经验日志/_index.md)
+
 ---
 
-*最后更新: 2026-07-07 | 共 4 个项目*
+*最后更新: 2026-07-08 | 共 4 个项目*
