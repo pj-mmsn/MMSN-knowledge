@@ -1,7 +1,10 @@
 ---
 title: Multi-Agent 多智能体协作
-tags: [AI, Multi-Agent, AutoGen, CrewAI, 多Agent协作, 协作模式]
-难度: 深入
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [AI, Agent, AutoGen, CrewAI]
+difficulty: 深入
 ---
 
 # Multi-Agent 多智能体协作

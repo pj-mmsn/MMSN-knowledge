@@ -1,7 +1,10 @@
 ---
 title: CAS 与原子类
-tags: [Java, 并发, CAS, Atomic]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, 并发]
+difficulty: 进阶
 ---
 
 # CAS 与原子类

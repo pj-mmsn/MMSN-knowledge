@@ -1,3 +1,11 @@
+---
+title: 8周Agent学习计划
+created: 2026-07-08
+updated: 2026-07-08
+type: project
+tags: [AI, Agent, 学习方法, 职业规划]
+---
+
 # 8 周 Agent 学习 + 项目双线计划
 
 > 📅 开始：2026-07-07 | 🎯 目标：8 周后具备 Agent 开发能力 + 完整项目 + 英文面试

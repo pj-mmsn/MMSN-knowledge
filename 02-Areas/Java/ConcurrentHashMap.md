@@ -1,7 +1,10 @@
 ---
 title: ConcurrentHashMap 原理
-tags: [Java, 集合, 并发, ConcurrentHashMap]
-难度: 深入
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, 集合, 并发]
+difficulty: 深入
 ---
 
 # ConcurrentHashMap 原理

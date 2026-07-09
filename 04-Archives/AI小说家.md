@@ -1,3 +1,11 @@
+---
+title: AI小说家
+created: 2026-07-08
+updated: 2026-07-08
+type: archive
+tags: [AI, Agent, Prompt, 项目复盘, Python]
+---
+
 # AI 小说家 — 项目实战经验
 
 <!-- PyQt5 桌面端 AI 写作工具，从零构建到完善的完整踩坑记录 -->

@@ -1,7 +1,10 @@
 ---
 title: HashMap 源码与原理
-tags: [Java, 集合, HashMap]
-难度: 深入
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, 集合]
+difficulty: 深入
 ---
 
 # HashMap 源码与原理

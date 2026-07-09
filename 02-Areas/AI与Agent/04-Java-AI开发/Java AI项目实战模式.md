@@ -1,7 +1,10 @@
 ---
 title: Java AI 项目实战模式
-tags: [Java, AI, 实战, SSE, 异步, 重试, 缓存, 部署]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, AI, 实战, 并发, 部署]
+difficulty: 进阶
 ---
 
 # Java AI 项目实战模式

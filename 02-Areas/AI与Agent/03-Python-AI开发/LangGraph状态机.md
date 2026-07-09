@@ -1,7 +1,10 @@
 ---
 title: LangGraph 状态机式 Agent 开发
-tags: [AI, LangGraph, 状态机, Agent, 工作流, 条件分支]
-难度: 深入
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [AI, LangGraph, Agent]
+difficulty: 深入
 ---
 
 # LangGraph 状态机式 Agent

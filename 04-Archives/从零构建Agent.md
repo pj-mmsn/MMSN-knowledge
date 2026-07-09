@@ -1,3 +1,11 @@
+---
+title: 从零构建Agent
+created: 2026-07-08
+updated: 2026-07-08
+type: archive
+tags: [AI, Agent, 项目复盘, Python, Java]
+---
+
 # 项目实战：从零构建 Agent
 
 <!-- 从零手写 AI Agent 学习项目(ai-agent-starter + ai-agent-java)的构建测试经验 -->

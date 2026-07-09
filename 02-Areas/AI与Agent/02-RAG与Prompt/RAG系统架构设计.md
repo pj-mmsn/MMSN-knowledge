@@ -1,7 +1,10 @@
 ---
 title: RAG 系统架构设计 — 从 Demo 到企业级
-tags: [AI, RAG, 架构设计, 系统设计, 企业级]
-难度: 深入
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [AI, RAG, 架构]
+difficulty: 深入
 ---
 
 # RAG 系统架构设计

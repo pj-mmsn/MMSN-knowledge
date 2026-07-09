@@ -1,3 +1,11 @@
+---
+title: Agent框架选型-2026
+created: 2026-07-08
+updated: 2026-07-08
+type: archive
+tags: [AI, Agent, 调研, 框架]
+---
+
 # Agent 框架选型 — 2026 年技术全景
 
 <!-- 2026 年 AI Agent 框架/协议最新格局，结合项目实战的选型建议 -->

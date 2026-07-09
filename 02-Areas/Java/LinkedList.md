@@ -1,7 +1,10 @@
 ---
 title: LinkedList 与双向链表
-tags: [Java, 集合, LinkedList]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, 集合]
+difficulty: 进阶
 ---
 
 # LinkedList 与双向链表

@@ -1,7 +1,10 @@
 ---
 title: RAG 企业级落地方案 — 从零到一搭建生产级知识库问答系统
-tags: [AI, RAG, 企业级, 落地, 实战, 知识库]
-难度: 深入
+created: 2026-07-08
+updated: 2026-07-08
+type: log
+tags: [AI, RAG, 架构, 实战, 工具]
+difficulty: 深入
 ---
 
 # RAG 企业级落地方案

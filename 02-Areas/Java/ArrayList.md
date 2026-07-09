@@ -1,7 +1,10 @@
 ---
 title: ArrayList 源码与原理
-tags: [Java, 集合, ArrayList]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, 集合]
+difficulty: 进阶
 ---
 
 # ArrayList 源码与原理

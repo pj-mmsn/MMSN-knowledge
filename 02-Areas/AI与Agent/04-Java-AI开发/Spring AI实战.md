@@ -1,7 +1,10 @@
 ---
 title: Spring AI 实战 — Java 集成 AI 的标准方式
-tags: [Java, Spring AI, Spring Boot, LLM, Function Calling, RAG]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, Spring, LLM, Agent, RAG]
+difficulty: 进阶
 ---
 
 # Spring AI 实战

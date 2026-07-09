@@ -1,7 +1,10 @@
 ---
 title: LangChain 实战开发
-tags: [AI, LangChain, Chain, Tool, Agent, 实战]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [AI, LangChain, Agent, 实战]
+difficulty: 进阶
 ---
 
 # LangChain 实战开发

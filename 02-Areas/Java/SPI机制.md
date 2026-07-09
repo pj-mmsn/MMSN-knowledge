@@ -1,7 +1,10 @@
 ---
 title: SPI 机制
-tags: [Java, 基础, SPI, 框架扩展]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, 概念入门, 框架]
+difficulty: 进阶
 ---
 
 # SPI 机制(Service Provider Interface)

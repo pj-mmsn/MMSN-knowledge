@@ -1,7 +1,10 @@
 ---
 title: Agent 架构模式全景 — ReAct / Plan-Execute / Reflection / LLMCompiler
-tags: [AI, Agent, 架构模式, ReAct, Plan-Execute, Reflection, LLMCompiler]
-难度: 深入
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [AI, Agent, 架构]
+difficulty: 深入
 ---
 
 # Agent 架构模式全景

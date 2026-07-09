@@ -1,7 +1,10 @@
 ---
 title: AQS 抽象队列同步器
-tags: [Java, 并发, AQS, 锁]
-难度: 深入
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, 并发]
+difficulty: 深入
 ---
 
 # AQS 抽象队列同步器

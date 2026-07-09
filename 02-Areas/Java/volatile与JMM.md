@@ -1,7 +1,10 @@
 ---
 title: volatile 与 Java 内存模型
-tags: [Java, 并发, volatile, JMM]
-难度: 深入
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, 并发]
+difficulty: 深入
 ---
 
 # volatile 与 Java 内存模型

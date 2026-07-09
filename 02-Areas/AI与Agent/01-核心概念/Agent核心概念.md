@@ -1,7 +1,10 @@
 ---
 title: AI Agent 核心概念与全景图
+created: 2026-07-08
+updated: 2026-07-08
+type: area
 tags: [AI, Agent, LLM, 概念入门]
-难度: 基础
+difficulty: 基础
 ---
 
 # AI Agent 核心概念与全景图

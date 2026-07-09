@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "87a372f0b07392eb",
+        "id": "53e3a144ca6d541f",
         "type": "tabs",
         "children": [
           {
-            "id": "60be41304e51c557",
+            "id": "ff5083ba0a0bb8af",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02-Areas/AI与Agent/_index.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "_index"
+              "title": "新标签页"
             }
           }
         ]
@@ -183,20 +179,41 @@
       "bases:新建数据库": false
     }
   },
-  "active": "60be41304e51c557",
+  "active": "ff5083ba0a0bb8af",
   "lastOpenFiles": [
-    "02-Areas/AI与Agent/记忆系统设计实战.md",
-    "02-Areas/AI与Agent/规划与推理.md",
-    "02-Areas/Python/_index.md",
+    "03-Resources/JavaGuide/README.md",
+    "04-Archives/视频工作室.md",
     "02-Areas/AI与Agent/_index.md",
-    "05-经验日志/实战场景与解决方案.md",
-    "05-经验日志/spring/启动报错.md",
-    "2026-07-07.md",
+    "02-Areas/AI与Agent/05-实战与运维/知识与代码双向映射.md",
+    "02-Areas/AI与Agent/05-实战与运维/记忆系统设计实战.md",
+    "02-Areas/AI与Agent/05-实战与运维/常见问题排错.md",
+    "02-Areas/AI与Agent/05-实战与运维/学习路径与转型指南.md",
+    "02-Areas/AI与Agent/05-实战与运维/Agent开发环境搭建指南.md",
+    "02-Areas/AI与Agent/05-实战与运维/部署与运维.md",
+    "02-Areas/AI与Agent/04-Java-AI开发/Java AI项目实战模式.md",
+    "02-Areas/AI与Agent/04-Java-AI开发/Java向量数据库与RAG.md",
+    "02-Areas/AI与Agent/04-Java-AI开发/Java LLM API调用.md",
+    "02-Areas/AI与Agent/04-Java-AI开发/Spring AI实战.md",
+    "02-Areas/AI与Agent/04-Java-AI开发/Java AI开发生态概览.md",
+    "02-Areas/AI与Agent/03-Python-AI开发/框架对比与选型.md",
+    "02-Areas/AI与Agent/03-Python-AI开发/Multi-Agent多智能体.md",
+    "02-Areas/AI与Agent/03-Python-AI开发/LangGraph状态机.md",
+    "02-Areas/AI与Agent/03-Python-AI开发/LangChain实战.md",
+    "02-Areas/AI与Agent/03-Python-AI开发/Python AI开发生态概览.md",
+    "02-Areas/AI与Agent/02-RAG与Prompt/Prompt工程.md",
+    "02-Areas/AI与Agent/02-RAG与Prompt/RAG系统架构设计.md",
+    "02-Areas/AI与Agent/02-RAG与Prompt/RAG检索增强生成.md",
+    "02-Areas/AI与Agent/01-核心概念/工具调用.md",
+    "02-Areas/AI与Agent/01-核心概念/记忆系统.md",
+    "02-Areas/AI与Agent/01-核心概念/规划与推理.md",
+    "02-Areas/AI与Agent/01-核心概念/Agent架构模式全景.md",
+    "02-Areas/AI与Agent/05-实战与运维",
+    "02-Areas/AI与Agent/04-Java-AI开发",
+    "02-Areas/AI与Agent/03-Python-AI开发",
+    "02-Areas/AI与Agent/02-RAG与Prompt",
+    "02-Areas/AI与Agent/01-核心概念",
     "未命名 1.canvas",
     "05-经验日志/技能备份/knowledge-sync/sync.py",
-    "02-Areas/Java/_模板.md",
-    "02-Areas/Java/README.md",
-    "02-Areas/AI与Agent/README.md",
     "03-Resources/JavaGuide/docs/system-design/framework/spring/images/spring-transaction/roollbackFor.png",
     "03-Resources/JavaGuide/docs/system-design/framework/spring/images/spring-transaction/PlatformTransactionManager.png",
     "03-Resources/JavaGuide/docs/system-design/framework/spring/images/spring-annotations/@RequestBody.png",
@@ -211,27 +228,6 @@
     "03-Resources/JavaGuide/docs/system-design/framework/spring/images/spring-annotations",
     "03-Resources/JavaGuide/docs/system-design/framework/spring/images/mvc-model2.drawio",
     "03-Resources/JavaGuide/docs/system-design/framework/spring/images/mvc-mode1.drawio",
-    "03-Resources/JavaGuide/docs/system-design/framework/spring/images/async",
-    "03-Resources/JavaGuide/docs/system-design/security/images/design-of-authority-system",
-    "03-Resources/JavaGuide/docs/system-design/framework/spring/springboot-knowledge-and-questions-summary.md",
-    "03-Resources/JavaGuide/docs/system-design/framework/spring/springboot-source-code.md",
-    "03-Resources/JavaGuide/docs/system-design/framework/spring/spring-knowledge-and-questions-summary.md",
-    "03-Resources/JavaGuide/docs/system-design/framework/spring/spring-transaction.md",
-    "03-Resources/JavaGuide/docs/system-design/framework/spring/spring-design-patterns-summary.md",
-    "03-Resources/JavaGuide/docs/system-design/framework/spring/spring-common-annotations.md",
-    "03-Resources/JavaGuide/docs/system-design/framework/spring/spring-boot-auto-assembly-principles.md",
-    "03-Resources/JavaGuide/docs/system-design/framework/spring/README.md",
-    "03-Resources/JavaGuide/docs/system-design/framework/spring/ioc-and-aop.md",
-    "03-Resources/JavaGuide/docs/system-design/framework/spring/images",
-    "03-Resources/JavaGuide/docs/system-design/framework/spring/async.md",
-    "03-Resources/JavaGuide/docs/system-design/framework/mybatis/mybatis-interview.md",
-    "03-Resources/JavaGuide/docs/high-performance/images/read-and-write-separation-and-library-subtable/two-forms-of-sub-table.drawio",
-    "03-Resources/JavaGuide/docs/system-design/basis/pictures/programming-principles.drawio",
-    "03-Resources/JavaGuide/docs/distributed-system/distributed-process-coordination/zookeeper/zookeeper-plus.md",
-    "03-Resources/JavaGuide/docs/distributed-system/distributed-process-coordination/zookeeper/zookeeper-in-action.md",
-    "03-Resources/JavaGuide/docs/distributed-system/distributed-process-coordination/zookeeper/README.md",
-    "03-Resources/JavaGuide/docs/distributed-system/distributed-process-coordination/zookeeper/zookeeper-intro.md",
-    "03-Resources/JavaGuide/docs/tools/maven/README.md",
     "未命名.canvas"
   ]
 }

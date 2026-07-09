@@ -1,7 +1,10 @@
 ---
 title: Python 高级特性 — 装饰器、生成器、上下文管理器、类型注解
-tags: [Python, 高级特性, 装饰器, 生成器, 类型注解, 上下文管理器]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Python]
+difficulty: 进阶
 ---
 
 # Python 高级特性

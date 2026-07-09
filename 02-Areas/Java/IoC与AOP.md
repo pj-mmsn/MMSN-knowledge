@@ -1,7 +1,10 @@
 ---
 title: Spring IoC 与 AOP
-tags: [Spring, 框架, IoC, AOP, 设计模式]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Spring, 框架, 架构]
+difficulty: 进阶
 ---
 
 # Spring IoC 与 AOP

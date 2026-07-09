@@ -1,7 +1,10 @@
 ---
 title: JVM 垃圾回收 GC
-tags: [Java, JVM, GC, 垃圾回收]
-难度: 深入
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, JVM]
+difficulty: 深入
 ---
 
 # JVM 垃圾回收 GC

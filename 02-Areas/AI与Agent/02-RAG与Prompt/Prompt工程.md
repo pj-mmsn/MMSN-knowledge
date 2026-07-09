@@ -1,7 +1,10 @@
 ---
 title: Prompt 工程 — Agent 质量的生命线
-tags: [AI, Prompt, 提示工程, CoT, Few-shot, 结构化输出, System Prompt]
-难度: 基础
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [AI, Prompt]
+difficulty: 基础
 ---
 
 # Prompt 工程

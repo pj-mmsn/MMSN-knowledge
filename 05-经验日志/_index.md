@@ -12,6 +12,8 @@
   - [RAG企业级落地方案](RAG企业级落地方案.md) — RAG 落地实践与踩坑
 - **Agent 实战** (1)
   - [实战场景与解决方案](实战场景与解决方案.md) — 14 种 Agent 开发场景速查
+- **DeepSeek API** (1)
+  - [DeepSeek API双协议调用](DeepSeek%20API双协议调用.md) — OpenAI vs Anthropic 端点、格式、三大坑
 - **Spring** (1)
   - [启动报错](spring/启动报错.md) — Spring Boot DataSource 配置问题
 
@@ -21,13 +23,13 @@
 
 | 经验 | 关联知识点 |
 |------|-----------|
-| Prompt工程实战 | [Prompt工程](../02-Areas/AI与Agent/Prompt工程.md) |
-| RAG企业级落地方案 | [RAG检索增强生成](../02-Areas/AI与Agent/RAG检索增强生成.md)、[RAG系统架构设计](../02-Areas/AI与Agent/RAG系统架构设计.md) |
-| 实战场景与解决方案 | [Agent核心概念](../02-Areas/AI与Agent/Agent核心概念.md)、[常见问题排错](../02-Areas/AI与Agent/常见问题排错.md) |
+| Prompt工程实战 | [Prompt工程](../02-Areas/AI与Agent/02-RAG与Prompt/Prompt工程.md) |
+| RAG企业级落地方案 | [RAG检索增强生成](../02-Areas/AI与Agent/02-RAG与Prompt/RAG检索增强生成.md)、[RAG系统架构设计](../02-Areas/AI与Agent/02-RAG与Prompt/RAG系统架构设计.md) |
+| 实战场景与解决方案 | [Agent核心概念](../02-Areas/AI与Agent/01-核心概念/Agent核心概念.md)、[常见问题排错](../02-Areas/AI与Agent/05-实战与运维/常见问题排错.md) |
 | Spring启动报错 | [IoC与AOP](../02-Areas/Java/IoC与AOP.md)、[Java基础知识](../02-Areas/Java/Java基础知识.md) |
 
 - 📦 项目复盘见 [04-Archives](../04-Archives/_index.md)
 
 ---
 
-*最后更新: 2026-07-08 | 共 4 条记录*
+*最后更新: 2026-07-08 | 共 5 条记录*

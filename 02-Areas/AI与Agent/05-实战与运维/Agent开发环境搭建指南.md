@@ -1,7 +1,10 @@
 ---
 title: AI Agent 开发环境搭建指南
-tags: [Python, Java, PyCharm, IntelliJ, 环境搭建, IDE, 配置, 教程]
-难度: 基础
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Python, Java, 工具]
+difficulty: 基础
 ---
 
 # AI Agent 开发环境搭建指南

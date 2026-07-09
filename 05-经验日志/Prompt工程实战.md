@@ -1,3 +1,11 @@
+---
+title: Prompt工程实战
+created: 2026-07-08
+updated: 2026-07-08
+type: log
+tags: [AI, Prompt, 实战, 排错]
+---
+
 # Prompt 工程实战
 
 <!-- 从 AI 小说家项目中提炼的提示词设计经验 -->
@@ -8,7 +16,7 @@
 
 **来源**：[AI 小说家](../04-Archives/AI小说家.md) 项目 — 为 5 种模式设计了 System Prompt，经历多轮迭代。
 
-**相关手册**：[Prompt工程](../02-Areas/AI与Agent/Prompt工程.md)
+**相关手册**：[Prompt工程](../02-Areas/AI与Agent/02-RAG与Prompt/Prompt工程.md)
 
 ---
 

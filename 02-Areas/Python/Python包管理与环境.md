@@ -1,7 +1,10 @@
 ---
 title: Python 包管理与环境 — pip/uv/venv/poetry
-tags: [Python, pip, uv, venv, poetry, 包管理, 虚拟环境]
-难度: 基础
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Python]
+difficulty: 基础
 ---
 
 # Python 包管理与环境

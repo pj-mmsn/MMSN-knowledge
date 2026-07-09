@@ -1,7 +1,10 @@
 ---
 title: ThreadLocal 线程本地变量
-tags: [Java, 并发, ThreadLocal]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, 并发]
+difficulty: 进阶
 ---
 
 # ThreadLocal 线程本地变量

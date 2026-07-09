@@ -1,7 +1,10 @@
 ---
 title: Java 基础核心知识
-tags: [Java, 基础]
-难度: 基础
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, 概念入门]
+difficulty: 基础
 ---
 
 # Java 基础核心知识

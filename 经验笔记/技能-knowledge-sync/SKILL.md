@@ -1,7 +1,4 @@
 ---
-created: 2026-07-08
-updated: 2026-07-08
-type: log
 name: knowledge-sync
 description: >
   GitHub 上传/同步/推送——所有和 GitHub 有关的文件操作都用这个技能。

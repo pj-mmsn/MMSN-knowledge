@@ -1,7 +1,10 @@
 ---
 title: Python AI 开发生态概览 — Agent 开发者的技术栈地图
-tags: [AI, Python, Agent, 生态, LangChain, 技术选型]
-难度: 基础
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [AI, Python, Agent, 调研, LangChain]
+difficulty: 基础
 ---
 
 # Python AI 开发生态概览

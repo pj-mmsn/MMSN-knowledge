@@ -1,7 +1,10 @@
 ---
 title: AI 开发 Python 库速查 — Agent 开发者必备工具包
-tags: [AI, Python, 工具, 速查, LangChain, Chroma, OpenAI]
-难度: 基础
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [AI, Python, 工具, LangChain, 向量数据库, LLM]
+difficulty: 基础
 ---
 
 # AI 开发 Python 库速查

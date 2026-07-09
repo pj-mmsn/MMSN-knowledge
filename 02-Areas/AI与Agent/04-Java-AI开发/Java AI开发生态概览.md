@@ -1,7 +1,10 @@
 ---
 title: Java AI 开发生态概览
-tags: [Java, AI, Spring AI, LangChain4j, 生态, 框架对比]
-难度: 基础
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, AI, Spring, LangChain, 调研]
+difficulty: 基础
 ---
 
 # Java AI 开发生态概览

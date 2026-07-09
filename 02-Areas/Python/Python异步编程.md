@@ -1,7 +1,10 @@
 ---
 title: Python 异步编程 — async/await 与 Agent 开发
-tags: [Python, 异步, async, await, asyncio, 并发, Agent]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Python, 并发, Agent]
+difficulty: 进阶
 ---
 
 # Python 异步编程

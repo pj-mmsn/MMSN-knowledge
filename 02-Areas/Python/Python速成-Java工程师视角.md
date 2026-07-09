@@ -1,7 +1,10 @@
 ---
 title: Python 速成 — Java 工程师视角
-tags: [Python, Java对比, 快速上手, 语法]
-难度: 基础
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Python]
+difficulty: 基础
 ---
 
 # Python 速成 — Java 工程师视角

@@ -1,7 +1,10 @@
 ---
 title: CAP 定理与 BASE 理论
-tags: [分布式, 理论, CAP, BASE, 一致性]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [分布式]
+difficulty: 进阶
 ---
 
 # CAP 定理与 BASE 理论

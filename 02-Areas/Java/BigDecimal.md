@@ -1,7 +1,10 @@
 ---
 title: BigDecimal 精度运算
-tags: [Java, 基础, BigDecimal]
-难度: 基础
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, 概念入门]
+difficulty: 基础
 ---
 
 # BigDecimal 精度运算

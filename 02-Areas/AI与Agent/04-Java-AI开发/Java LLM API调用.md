@@ -1,7 +1,10 @@
 ---
 title: Java LLM API 调用与 Function Calling
-tags: [Java, LLM, API, OkHttp, Function Calling, 原生调用, DeepSeek]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, LLM, API, Agent]
+difficulty: 进阶
 ---
 
 # Java LLM API 调用与 Function Calling

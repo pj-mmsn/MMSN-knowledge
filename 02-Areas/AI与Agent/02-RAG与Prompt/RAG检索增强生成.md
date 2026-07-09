@@ -1,7 +1,10 @@
 ---
 title: RAG 检索增强生成
-tags: [AI, RAG, 检索增强, 向量检索, Embedding, 文档切分, 重排序]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [AI, RAG]
+difficulty: 进阶
 ---
 
 # RAG 检索增强生成

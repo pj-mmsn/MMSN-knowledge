@@ -1,7 +1,10 @@
 ---
 title: synchronized 与 Lock
-tags: [Java, 并发, 锁, synchronized, ReentrantLock]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, 并发]
+difficulty: 进阶
 ---
 
 # synchronized 与 Lock

@@ -1,7 +1,10 @@
 ---
 title: Python 数据与文件处理
-tags: [Python, JSON, CSV, 正则, 文件操作, Path, 数据处理]
-难度: 基础
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Python]
+difficulty: 基础
 ---
 
 # Python 数据与文件处理

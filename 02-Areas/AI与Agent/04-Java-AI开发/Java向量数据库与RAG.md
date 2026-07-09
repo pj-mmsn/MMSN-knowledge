@@ -1,7 +1,10 @@
 ---
 title: Java 向量数据库与 RAG
-tags: [Java, 向量数据库, Chroma, JVector, RAG, Spring AI, Milvus]
-难度: 进阶
+created: 2026-07-08
+updated: 2026-07-08
+type: area
+tags: [Java, 向量数据库, RAG, Spring]
+difficulty: 进阶
 ---
 
 # Java 向量数据库与 RAG
