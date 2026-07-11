@@ -1,800 +1,558 @@
 ---
-title: 面试突击手册 — Java开发 + AI开发（图解版）
+title: 面试突击手册 — Java全栈 + AI开发 完整版
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-07-11
 type: project
-tags: [Java, AI, Agent, 职业规划, 面试]
+tags: [Java, AI, Agent, Spring, MySQL, Redis, 分布式, 面试]
 ---
 
-# 🎯 面试突击手册 — Java + AI 图解版
+# 🎯 面试突击手册 — Java 全栈 + AI 完整版
 
-> 每道题「一句话 → 图解 → 原理 → 源码细节 → 面试话术」完整链路。所有图表用 Mermaid 渲染。
+> **覆盖 15 个模块，每道题「图解 → 原理 → 源码 → 话术」。**
 
 ---
 
-## 一、HashMap — 面试第一题，问到源码才算及格
+## 目录
 
-### 数据结构全景
+| # | 模块 | 面试权重 | 状态 |
+|---|------|:--:|:--:|
+| 1 | HashMap + ConcurrentHashMap | ★★★★★ | ✅ 已有 |
+| 2 | 线程池 | ★★★★★ | ✅ 已有 |
+| 3 | synchronized + volatile + AQS | ★★★★★ | ✅ 已有 |
+| 4 | JVM GC + 内存结构 | ★★★★ | ✅ 已有 |
+| 5 | **Spring Boot + IoC/AOP** | ★★★★★ | 🆕 |
+| 6 | **MySQL 索引 + 事务 + 优化** | ★★★★★ | 🆕 |
+| 7 | **Redis 缓存策略 + 持久化** | ★★★★ | 🆕 |
+| 8 | **消息队列 MQ** | ★★★★ | 🆕 |
+| 9 | **分布式系统 (CAP/事务/锁)** | ★★★★ | 🆕 |
+| 10 | **MyBatis** | ★★★ | 🆕 |
+| 11 | **设计模式** | ★★★ | 🆕 |
+| 12 | **计算机网络** | ★★★ | 🆕 |
+| 13 | **系统设计** | ★★★★ | 🆕 |
+| 14 | AI / Agent / RAG / Spring AI | ★★★ | ✅ 已有 |
+| 15 | 面试话术 + 反问模板 | - | 🆕 |
 
-```mermaid
-graph TB
-    subgraph HashMap["HashMap (JDK 1.8+)"]
-        TABLE["⚡ table 桶数组<br/>容量=16（2的幂）"] --> I1["桶[0]"]
-        TABLE --> I2["桶[1]"]
-        TABLE --> I3["桶[2]"]
-        TABLE --> I4["..."]
-        TABLE --> I15["桶[15]"]
+> ⚠️ 模块 1-4 + 14 在之前版本已详解，本文重点补全新模块 5-13。
 
-        I1 --> N1["Node(k1,v1)"]
-        N1 -->|"next"| N2["Node(k2,v2)"]
-        N2 -->|"next"| N3["Node(k3,v3) ← 链表"]
+---
 
-        I15 --> T1["TreeNode"]
-        T1 --> T2["TreeNode"]
-        T2 --> T3["TreeNode"]
-        T1 -.->|"left"| T2
-        T1 -.->|"right"| T3
-    end
+## 五、Spring Boot — 问得比 Java 基础还多
 
-    style TABLE fill:#1a1a2e,stroke:#4fc3f7,color:#fff
-    style T1 fill:#2d1b00,stroke:#ff9800,color:#fff
-    style N1 fill:#0d3300,stroke:#4caf50,color:#fff
-```
-
-### 位运算：为什么容量必须是 2 的幂
-
-HashMap 用 `(n - 1) & hash` 定位桶，代替 `hash % n`。
-
-**位与 `&`**：两 bit 都是 1 结果才为 1。n 是 2 的幂 → n-1 二进制全是 1 → 保留 hash 全部低位 → 分布均匀。
-
-```mermaid
-flowchart LR
-    subgraph "取模 vs 位与"
-        MOD["hash % 16"] -->|"除法指令<br/>~30 CPU周期"| R1["结果 = 6"]
-        AND["hash & 15"] -->|"1条 AND 指令<br/>~1 CPU周期"| R2["结果 = 6"]
-    end
-
-    subgraph "位与原理 (hash=214, n=16)"
-        BIN["1101 0110 (214)"]
-        MASK["0000 1111 (15 = n-1)"]
-        RES["0000 0110 (= 6)"]
-        BIN -->|"&"| RES
-        MASK -->|"&"| RES
-    end
-```
-
-**扰动函数**：高 16 位和低 16 位做异或（XOR），让高位也参与定位：
+### 自动配置原理
 
 ```java
-// HashMap.hash() 源码
-static final int hash(Object key) {
-    int h;
-    return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
-}
+// @SpringBootApplication 是一个组合注解：
+@SpringBootConfiguration   // = @Configuration
+@EnableAutoConfiguration   // ← 核心！自动配置
+@ComponentScan             // 扫描当前包下的组件
+
+// @EnableAutoConfiguration 做了什么：
+//   1. 导入 AutoConfigurationImportSelector
+//   2. 读取 META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports
+//   3. 加载所有 xxxAutoConfiguration 类
+//   4. 每个 AutoConfiguration 上有 @ConditionalOnXxx 条件注解
+//   5. 满足条件 → 自动创建 Bean（如 DataSource、RedisTemplate）
 ```
 
 ```mermaid
 flowchart LR
-    H["原始 hashCode<br/>1101 0110 0011 1001<br/>1010 0101 1110 0011"]
-    H -->|"高16位"| HIGH["1101 0110 0011 1001"]
-    H -->|"低16位"| LOW["1010 0101 1110 0011"]
-    HIGH --> XOR["🔄 XOR (^)"]
-    LOW --> XOR
-    XOR --> FINAL["最终 hash<br/>0111 0011 1101 1010<br/>← 高位融入低位"]
+    APP["@SpringBootApplication"] --> AUTO["@EnableAutoConfiguration"]
+    AUTO --> SELECTOR["AutoConfigurationImportSelector"]
+    SELECTOR --> IMPORTS["读取 spring.factories / .imports"]
+    IMPORTS --> CLASSES["加载所有 xxxAutoConfiguration"]
+    CLASSES --> CONDITION{"@ConditionalOnClass?<br/>@ConditionalOnBean?<br/>@ConditionalOnProperty?"}
+    CONDITION -->|"✅ 满足"| CREATE["自动创建 Bean<br/>如 DataSource、RedisTemplate"]
+    CONDITION -->|"❌ 不满足"| SKIP["跳过"]
 ```
 
-### 红黑树五条铁律
-
-```mermaid
-graph TB
-    ROOT["● 根节点 (永远黑色)"] --> R1["○ 红色节点"]
-    ROOT --> R2["○ 红色节点"]
-    R1 --> B1["● 黑色"]
-    R1 --> B2["● 黑色"]
-    R2 --> B3["● 黑色"]
-    R2 --> B4["● 黑色"]
-
-    RULE["📋 五条铁律<br/>1. 节点要么红要么黑<br/>2. 根永远黑<br/>3. 红节点孩子必须是黑<br/>4. 任意路径黑节点数相同<br/>5. NIL 叶子算黑色"]
-
-    style ROOT fill:#1a1a1a,stroke:#fff,color:#fff
-    style R1 fill:#cc0000,stroke:#ff4444,color:#fff
-    style R2 fill:#cc0000,stroke:#ff4444,color:#fff
-    style B1 fill:#1a1a1a,stroke:#888,color:#fff
-    style B2 fill:#1a1a1a,stroke:#888,color:#fff
-    style B3 fill:#1a1a1a,stroke:#888,color:#fff
-    style B4 fill:#1a1a1a,stroke:#888,color:#fff
-```
-
-| 对比 | 链表 | 红黑树 | AVL 树 |
-|------|:--:|:--:|:--:|
-| 查找 | O(n) | O(log n) | O(log n) 稍快 |
-| 插入 | O(1) | O(log n)，最多旋转 3 次 | O(log n)，可能多次旋转 |
-| HashMap 的选择 | 短链表时用 | **链表 ≥8 时转** ✅ | 维护成本太高 |
-
-### put 流程（源码级）
+### Spring Bean 生命周期
 
 ```mermaid
 flowchart TD
-    START(["put(key, value)"]) --> HASH["① hash(key)<br/>= key.hashCode() ^ (h>>>16)"]
-    HASH --> IDX["② i = (n-1) & hash<br/>定位桶下标"]
-    IDX --> EMPTY{"③ tab[i] == null?"}
-    EMPTY -->|"✅ 是"| NEWNODE["tab[i] = newNode()<br/>直接放入"]
-    EMPTY -->|"❌ 否"| EQUALS{"key 相等?<br/>(hash== && equals==)"}
-    EQUALS -->|"✅ 覆盖"| OVERWRITE["覆盖旧 value"]
-    EQUALS -->|"❌ 否"| ISTREE{"是 TreeNode?"}
-    ISTREE -->|"🌲 是"| TREEINS["红黑树插入<br/>putTreeVal()"]
-    ISTREE -->|"📋 否"| TRAVERSE["遍历链表<br/>尾插法"]
-    TRAVERSE --> FOUND{"找到相同 key?"}
-    FOUND -->|"✅"| OVERWRITE
-    FOUND -->|"❌ 到尾部"| TAIL["尾插入<br/>binCount++"]
-    TAIL --> CHECK8{"binCount ≥ 8?"}
-    CHECK8 -->|"✅"| CHECK64{"数组长度 ≥ 64?"}
-    CHECK64 -->|"✅"| TREEIFY["🌲 树化为红黑树"]
-    CHECK64 -->|"❌"| RESIZE1["📦 只扩容不树化"]
-    CHECK8 -->|"❌"| DONE1(["✅"])
-    NEWNODE --> SIZECHECK
-    OVERWRITE --> SIZECHECK
-    TREEINS --> SIZECHECK
-    TREEIFY --> SIZECHECK
-    RESIZE1 --> SIZECHECK
-    TAIL --> SIZECHECK{"④ ++size > threshold?"}
-    SIZECHECK -->|"✅ 超阈值"| RESIZE2["📦 扩容 ×2<br/>容量翻倍，rehash"]
-    SIZECHECK -->|"❌"| DONE2(["✅ 完成"])
-    RESIZE2 --> DONE2
-
-    style HASH fill:#4a148c,stroke:#ce93d8,color:#fff
-    style TREEIFY fill:#e65100,stroke:#ff9800,color:#fff
-    style RESIZE2 fill:#b71c1c,stroke:#ef5350,color:#fff
+    INST["① 实例化<br/>反射调用构造方法"] --> POPULATE["② 属性填充<br/>@Autowired / @Value 注入"]
+    POPULATE --> AWARE["③ Aware 回调<br/>BeanNameAware → BeanFactoryAware"]
+    AWARE --> BEFORE["④ BeanPostProcessor#before<br/>（AOP 代理在这里生成！）"]
+    BEFORE --> INIT["⑤ @PostConstruct<br/>InitializingBean#afterPropertiesSet"]
+    INIT --> AFTER["⑥ BeanPostProcessor#after<br/>（AOP 最终代理确认）"]
+    AFTER --> USE["⑦ 使用中..."]
+    USE --> DESTROY["⑧ @PreDestroy<br/>DisposableBean#destroy"]
 ```
 
-### 扩容时元素怎么搬（JDK 1.8 优化）
-
-```mermaid
-flowchart LR
-    subgraph OLD["旧数组 容量=16"]
-        O0["桶[0]"]
-        O1["桶[1]"]
-        O5["桶[5] ← key所在"]
-        O15["桶[15]"]
-    end
-
-    O5 --> CHECK{"hash & oldCap<br/>= hash & 16"}
-    CHECK -->|"== 0"| STAY["→ 新桶[5]<br/>原位不动"]
-    CHECK -->|"!= 0"| MOVE["→ 新桶[5+16]=[21]<br/>原下标+旧容量"]
-
-    subgraph NEW["新数组 容量=32"]
-        N0["桶[0]"]
-        N5["桶[5] ← 部分元素留这"]
-        N15["桶[15]"]
-        N21["桶[21] ← 部分元素搬这"]
-        N31["桶[31]"]
-    end
-
-    STAY --> N5
-    MOVE --> N21
-
-    style OLD fill:#1a237e,stroke:#5c6bc0,color:#fff
-    style NEW fill:#004d40,stroke:#4db6ac,color:#fff
-```
-
-**面试话术**：「HashMap 有三个理解层次——第一层背数据结构，第二层讲清楚位运算和扰动函数，第三层能说出扩容时只需判断 `hash & oldCap` 决定去留、不需要重新 hash。面试官从你回答的深度就能判断你是背的还是真看过源码。」
-
----
-
-## 二、ConcurrentHashMap — 高并发安全的精髓
-
-### 锁策略演进
-
-```mermaid
-graph TB
-    subgraph JDK7["JDK 1.7: Segment 分段锁"]
-        S0["Segment[0]<br/>🔒 ReentrantLock"]
-        S1["Segment[1]<br/>🔒 ReentrantLock"]
-        S15["Segment[15]<br/>🔒 ReentrantLock"]
-        S0 --> H0["HashEntry 数组"]
-        S1 --> H1["HashEntry 数组"]
-        S15 --> H15["HashEntry 数组"]
-    end
-
-    subgraph JDK8["JDK 1.8: CAS + synchronized 锁单桶"]
-        T0["桶[0]"]
-        T1["桶[1]"]
-        T2["桶[2]<br/>空 → CAS 放"]
-        T3["桶[3]"]
-        T16["桶[15]<br/>有数据 → 🔒 synchronized"]
-    end
-
-    JDK7 -->|"锁粒度: Segment级<br/>并发度: 16"| JDK8
-    JDK8 -->|"锁粒度: 桶级<br/>并发度: 数组长度"| BETTER["✅ 性能提升"]
-
-    style JDK7 fill:#4a0000,stroke:#ef5350,color:#fff
-    style JDK8 fill:#0d3300,stroke:#66bb6a,color:#fff
-    style BETTER fill:#1a237e,stroke:#42a5f5,color:#fff
-```
-
-### CAS 原理
-
-```mermaid
-sequenceDiagram
-    participant T1 as 🧵 线程A
-    participant MEM as 📍 内存 value
-    participant T2 as 🧵 线程B
-
-    Note over MEM: 初始 value = 10
-
-    T1->>MEM: CAS(10 → 20)
-    Note over MEM: 10 == 10 ✅
-    MEM-->>T1: 成功！value = 20
-
-    T2->>MEM: CAS(10 → 30)
-    Note over MEM: 10 ≠ 20 ❌
-    MEM-->>T2: 失败！value 已是 20
-
-    T2->>T2: 🔄 自旋重试：重新读 value = 20
-    T2->>MEM: CAS(20 → 30)
-    Note over MEM: 20 == 20 ✅
-    MEM-->>T2: 成功！value = 30
-```
-
-### put 流程（1.8 源码路径）
-
-```mermaid
-flowchart TD
-    START(["put(key, value)"]) --> SPREAD["spread(key.hashCode())<br/>扰动函数"]
-    SPREAD --> LOOP{"🔁 自旋 for(;;)"}
-    LOOP --> INIT{"tab 未初始化?"}
-    INIT -->|"✅"| INITTAB["initTable()<br/>CAS 设置 sizeCtl<br/>只有一个线程初始化"]
-    INIT -->|"❌"| EMPTY{"tab[i] == null?"}
-    EMPTY -->|"✅ 空桶"| CAS{"casTabAt()"}
-    CAS -->|"✅ 成功"| DONE(["🚀 无锁！最快路径"])
-    CAS -->|"❌ 失败"| LOOP
-    EMPTY -->|"❌ 有数据"| MOVED{"hash == MOVED(-1)?"}
-    MOVED -->|"✅ 正在扩容"| HELP["🤝 helpTransfer()<br/>帮忙搬运数据"]
-    MOVED -->|"❌"| LOCK["🔒 synchronized(tab[i])<br/>锁住桶头节点"]
-    LOCK --> CHECKAGAIN["再次检查 tab[i]"]
-    CHECKAGAIN --> TREECHECK{"是 TreeBin?"}
-    TREECHECK -->|"🌲"| TREEINS["红黑树插入"]
-    TREECHECK -->|"📋"| LISTTRAV["遍历链表<br/>尾插法"]
-    LISTTRAV --> FOUND{"找到相同 key?"}
-    FOUND -->|"✅"| OVERWRITE["覆盖旧值"]
-    FOUND -->|"❌"| TAILINSERT["尾插入"]
-    TREEINS --> ADDCOUNT
-    OVERWRITE --> ADDCOUNT
-    TAILINSERT --> ADDCOUNT["addCount(1, binCount)<br/>检查是否需要扩容"]
-
-    style CAS fill:#0d3300,stroke:#66bb6a,color:#fff
-    style LOCK fill:#e65100,stroke:#ff9800,color:#fff
-    style DONE fill:#0d3300,stroke:#66bb6a,color:#fff
-    style HELP fill:#1a237e,stroke:#42a5f5,color:#fff
-```
-
-### 分段计数 — 怎么不靠锁统计 size
-
-```mermaid
-flowchart LR
-    BC["baseCount"] -->|"CAS +1"| RESULT["size() 求和"]
-    CC1["CounterCell[0]"] -->|"CAS +1"| RESULT
-    CC2["CounterCell[1]"] -->|"CAS +1"| RESULT
-    CC3["CounterCell[...]"] -->|"CAS +1"| RESULT
-
-    subgraph "写操作"
-        WRITE["线程随机选一个 Cell<br/>CAS 递增"]
-    end
-
-    WRITE -.->|"无竞争!"| CC1
-    WRITE -.->|"无竞争!"| CC2
-```
-
----
-
-## 三、线程池 — 不只是背 7 参数
-
-### 状态机
-
-```mermaid
-stateDiagram-v2
-    [*] --> RUNNING : new ThreadPoolExecutor()
-    RUNNING --> SHUTDOWN : shutdown()
-    RUNNING --> STOP : shutdownNow()
-    SHUTDOWN --> TIDYING : 队列为空
-    STOP --> TIDYING : 所有线程终止
-    TIDYING --> TERMINATED : terminated() 执行完
-    TERMINATED --> [*]
-```
-
-### ctl 位打包
-
-```
-一个 AtomicInteger ctl 同时存储状态 + 线程数：
-┌──────────────┬─────────────────────────────────┐
-│  高 3 位      │  低 29 位                        │
-│  运行状态      │  工作线程数 (workerCount)          │
-└──────────────┴─────────────────────────────────┘
-  RUNNING  = 111 (-1)
-  SHUTDOWN = 000 (0)
-  STOP     = 001 (1)
-  TIDYING  = 010 (2)
-  TERMINATED=011 (3)
-```
-
-### 核心执行流程
-
-```mermaid
-flowchart TD
-    TASK(["submit(task)"]) --> WC{"workerCount<br/> < corePoolSize?"}
-    WC -->|"✅ 是"| COREWORKER["📗 addWorker(task, true)<br/>创建核心线程<br/>（不管队列有没有空位）"]
-    WC -->|"❌ 否"| OFFER{"workQueue.offer(task)"}
-    OFFER -->|"✅ 入队成功"| QUEUED["任务在队列等待<br/>Worker 空闲时 getTask() 取走"]
-    OFFER -->|"❌ 队列满"| MAX{"workerCount<br/> < maximumPoolSize?"}
-    MAX -->|"✅ 是"| NONCORE["📙 addWorker(task, false)<br/>创建非核心线程<br/>keepAliveTime 后回收"]
-    MAX -->|"❌ 也满了"| REJECT["🛑 触发拒绝策略"]
-
-    style COREWORKER fill:#0d3300,stroke:#66bb6a,color:#fff
-    style NONCORE fill:#e65100,stroke:#ff9800,color:#fff
-    style REJECT fill:#b71c1c,stroke:#ef5350,color:#fff
-```
-
-### Worker 怎么取任务
+### 循环依赖 — 三级缓存
 
 ```java
-// Worker.run() 里不断循环
-while (task != null || (task = getTask()) != null) {
-    task.run();  // 执行任务
-    task = null;
-}
+// DefaultSingletonBeanRegistry 的三级缓存：
+Map<String, Object> singletonObjects;        // 一级：完全初始化好的 Bean
+Map<String, Object> earlySingletonObjects;   // 二级：提前暴露的 Bean（未完成填充）
+Map<String, ObjectFactory<?>> singletonFactories; // 三级：Bean 工厂（可生成代理）
 
-// getTask() 核心逻辑：
-Runnable r = timed ?
-    workQueue.poll(keepAliveTime, NANOSECONDS) :  // 超时等待（非核心线程）
-    workQueue.take();                               // 阻塞等待（核心线程）
-if (r == null) return null;  // 超时没拿到 → Worker 退出
+// 解决流程：A 依赖 B，B 依赖 A
+// ① 创建 A → 实例化 → 放入三级缓存 → 发现需要 B
+// ② 创建 B → 实例化 → 放入三级缓存 → 发现需要 A
+// ③ 从三级缓存取 A（还未填充属性，只是提前引用）
+// ④ B 填充 A → B 完成 → 放入一级缓存
+// ⑤ A 填充 B → A 完成 → 放入一级缓存
 ```
 
-### 四种拒绝策略
+### Spring 常用注解速查
+
+| 类别 | 注解 | 作用 |
+|------|------|------|
+| Bean 注册 | `@Component` `@Service` `@Repository` `@Controller` | 标记为 Spring Bean |
+| 配置 | `@Configuration` `@Bean` | Java Config 方式配置 |
+| 依赖注入 | `@Autowired` `@Qualifier` `@Value` | 自动注入依赖 |
+| 条件 | `@ConditionalOnClass` `@ConditionalOnMissingBean` | 条件装配 |
+| 事务 | `@Transactional` | 声明式事务 |
+| AOP | `@Aspect` `@Before` `@After` `@Around` | 切面编程 |
+| MVC | `@RestController` `@GetMapping` `@RequestParam` `@PathVariable` | REST 接口 |
+| 异步 | `@Async` `@EnableAsync` | 异步方法 |
+| 定时 | `@Scheduled` `@EnableScheduling` | 定时任务 |
+
+### Spring Boot vs Spring MVC
+
+| 维度 | Spring MVC | Spring Boot |
+|------|-----------|-------------|
+| 配置 | XML / Java Config，手动配 DispatcherServlet | **零配置**，自动装配 |
+| 启动 | 需要外部 Tomcat | **内嵌 Tomcat**，直接 `main()` |
+| 依赖 | 手动管理冲突 | starter 一站式 |
+| 监控 | 无 | **Actuator** 健康检查 |
+
+---
+
+## 六、MySQL — 从索引到优化一条龙
+
+### B+Tree 索引原理
+
+MySQL InnoDB 用 B+Tree，不用 Hash/二叉树/B-Tree：
+
+```mermaid
+flowchart TB
+    ROOT["🌳 根节点（常驻内存）<br/>key1 | key2 | key3 ... <br/>↓ 每个 key 指向子节点"]
+    ROOT --> BR1["内部节点<br/>key | key | key ..."]
+    ROOT --> BR2["内部节点<br/>key | key | key ..."]
+    BR1 --> LEAF1["🍃 叶子节点（存数据！）<br/>PK=1,name=张三 | PK=2,name=李四 → next →"]
+    BR1 --> LEAF2["🍃 叶子节点<br/>PK=5,name=王五 | PK=6,name=赵六 → next →"]
+    BR2 --> LEAF3["🍃 叶子节点<br/>PK=9..."]
+    LEAF1 -.->|"双向链表"| LEAF2
+    LEAF2 -.->|"双向链表"| LEAF3
+```
+
+**B+Tree 为什么好**：非叶子节点只存 Key（扇出大，3-4 层存千万级数据）+ 叶子节点双向链表（范围查询极快）。
+
+### 索引类型
+
+| 类型 | 叶子存什么 | 特点 |
+|------|-----------|------|
+| **聚簇索引**（主键） | 完整行数据 | 一张表只有一个，InnoDB 必须有 |
+| **二级索引** | 主键值 | 查到主键后要**回表** |
+| **联合索引** | 多列组合 | 遵循最左前缀 |
+| **覆盖索引** | 查询列全在索引里 | 不用回表，Extra=Using index |
+
+### 最左前缀原则
+
+```sql
+-- 联合索引 (a, b, c)
+WHERE a=1              -- ✅ 用到 a
+WHERE a=1 AND b=2      -- ✅ 用到 a,b
+WHERE a=1 AND b>2      -- ✅ a 精确 + b 范围（c 失效）
+WHERE b=2              -- ❌ 缺 a，不走索引
+WHERE a=1 AND c=3      -- ⚠️ 只用 a（跳过了 b，c 失效）
+```
+
+### 事务 ACID + 隔离级别
+
+```
+原子性 Atomicity:  要么全成功，要么全回滚（undo log）
+一致性 Consistency: 事务前后数据满足约束
+隔离性 Isolation:   并发事务互不干扰（MVCC + 锁）
+持久性 Durability:  提交后数据不丢失（redo log）
+```
+
+| 隔离级别 | 脏读 | 不可重复读 | 幻读 | 实现 |
+|---------|:--:|:--:|:--:|------|
+| READ UNCOMMITTED | ✅ | ✅ | ✅ | 几乎不用 |
+| READ COMMITTED | ❌ | ✅ | ✅ | Oracle 默认 |
+| **REPEATABLE READ** | ❌ | ❌ | ✅ | **MySQL InnoDB 默认** |
+| SERIALIZABLE | ❌ | ❌ | ❌ | 锁表，性能最差 |
+
+> MySQL 的 RR 通过 **MVCC（多版本并发控制）+ Next-Key Lock** 解决了大部分幻读。
+
+### Explain 执行计划关键字段
+
+```sql
+EXPLAIN SELECT * FROM orders WHERE user_id = 123;
+```
+
+| 字段 | 含义 | 好 | 坏 |
+|------|------|-----|-----|
+| type | 访问类型 | const > ref > range | index > **ALL**（全表扫描） |
+| key | 实际用的索引 | 有值 | NULL |
+| rows | 扫描行数 | 越少越好 | 大 |
+| Extra | 额外信息 | Using index（覆盖索引） | Using filesort（文件排序）、Using temporary（临时表） |
+
+### SQL 优化清单
+
+1. **最左前缀** — 联合索引不在最左列，索引失效
+2. **函数/计算** — `WHERE YEAR(create_time)=2026` 不走索引，改成 `WHERE create_time BETWEEN '2026-01-01' AND '2026-12-31'`
+3. **隐式类型转换** — `WHERE phone=13800138000` 但 phone 是 varchar → 全表扫描
+4. **LIKE 前置百分号** — `LIKE '%abc'` 不走索引，`LIKE 'abc%'` 可以
+5. **OR** — 两边都有索引才走索引，否则全表扫描
+6. **SELECT \*** — 尽量用覆盖索引减少回表
+7. **深分页** — `LIMIT 100000, 10` → 用游标分页或子查询优化
+
+---
+
+## 七、Redis — 不只是缓存
+
+### 五种数据类型 + 使用场景
+
+| 类型 | 底层 | 场景 |
+|------|------|------|
+| **String** | SDS（简单动态字符串） | 缓存、计数器、分布式锁 |
+| **Hash** | ziplist / hashtable | 对象存储（用户信息） |
+| **List** | quicklist | 消息队列、最新列表 |
+| **Set** | intset / hashtable | 标签、共同好友、去重 |
+| **ZSet** | skiplist + dict | 排行榜、延时队列 |
+
+### 缓存三大问题
 
 ```mermaid
 flowchart TD
-    REJECTED["🛑 任务被拒绝"] --> POLICIES
+    subgraph PENETRATION["🔴 缓存穿透"]
+        P1["请求数据 DB 也不存在"]
+        P2["Redis 和 DB 都查不到"]
+        P3["大量请求直接打到 DB"]
+    end
+    subgraph BREAKDOWN["🟡 缓存击穿"]
+        B1["热点 key 过期"]
+        B2["瞬时大量请求"]
+        B3["直接打爆 DB"]
+    end
+    subgraph AVALANCHE["🟠 缓存雪崩"]
+        A1["大量 key 同时过期"]
+        A2["缓存层集体失效"]
+        A3["DB 瞬时压力暴增"]
+    end
 
-    POLICIES --> ABORT["AbortPolicy (默认)<br/>throw RejectedExecutionException"]
-    POLICIES --> CALLER["CallerRunsPolicy<br/>谁提交谁自己执行<br/>→ 降低任务提交速度"]
-    POLICIES --> DISCARD["DiscardPolicy<br/>静默丢弃任务<br/>⚠️ 危险！没有任何通知"]
-    POLICIES --> OLDEST["DiscardOldestPolicy<br/>丢弃队列最旧任务<br/>重新 submit 新任务"]
+    P3 --> P_SOLVE["✅ 布隆过滤器 / 缓存空值"]
+    B3 --> B_SOLVE["✅ 互斥锁 / 永不过期+异步更新"]
+    A3 --> A_SOLVE["✅ 过期时间加随机值 / 集群高可用"]
+```
 
-    style ABORT fill:#b71c1c,stroke:#ef5350,color:#fff
-    style CALLER fill:#e65100,stroke:#ff9800,color:#fff
-    style DISCARD fill:#4a0000,stroke:#ef5350,color:#fff
+### Redis 持久化 RDB vs AOF
+
+| | RDB | AOF |
+|------|-----|-----|
+| 方式 | 快照（某一时刻全量数据） | 追加写命令日志 |
+| 文件 | dump.rdb | appendonly.aof |
+| 恢复 | **快**（直接加载） | 慢（逐条重放命令） |
+| 数据安全 | 可能丢最后一次快照后的数据 | **更安全**（最多丢 1 秒） |
+| 生产 | **两者都开**，用 RDB 恢复 + AOF 保数据 | |
+
+### 分布式锁
+
+```java
+// Redis 分布式锁要点：
+// ① SET NX PX：原子地加锁+设过期
+String result = jedis.set(lockKey, requestId, "NX", "PX", 30000);
+
+// ② 解锁用 Lua 脚本，保证原子性（先查再删）
+//    KEYS[1] = lockKey, ARGV[1] = requestId
+"if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end"
+
+// ③ Redisson 的 RedLock 和看门狗机制
+//    看门狗：每 10 秒续期，防止业务没处理完锁就过期
 ```
 
 ---
 
-## 四、synchronized — 从 Mark Word 到锁升级
+## 八、消息队列 MQ
 
-### Mark Word 内存布局（64位 JVM）
-
-```mermaid
-graph LR
-    subgraph "无锁 (001)"
-        N1["unused:25 | hash:31 | unused | age | 001"]
-    end
-    subgraph "偏向锁 (101)"
-        B1["thread_id:54 | epoch:2 | age | 101"]
-    end
-    subgraph "轻量级锁 (00)"
-        L1["指向栈中 Lock Record 的指针 | 00"]
-    end
-    subgraph "重量级锁 (10)"
-        H1["指向 ObjectMonitor 的指针 | 10"]
-    end
-
-    N1 -->|"线程A第一次访问"| B1
-    B1 -->|"线程B也来竞争"| L1
-    L1 -->|"自旋超时/竞争激烈"| H1
-```
-
-### 锁升级流程
+### 为什么用 MQ — 三大核心场景
 
 ```mermaid
-flowchart TD
-    NEW(["新建对象"]) --> NOLOCK["🔓 无锁<br/>Mark Word: 001"]
-    NOLOCK -->|"线程A首次访问同步块"| BIASED["🔹 偏向锁<br/>Mark Word 存 thread_id<br/>同线程再进直接通行"]
-    BIASED -->|"线程B 也来竞争<br/>thread_id 不是 B"| LIGHT["🔸 轻量级锁<br/>CAS 争夺 Lock Record<br/>线程自适应自旋等待"]
-    LIGHT -->|"自旋超时<br/>竞争激烈"| HEAVY["🔒 重量级锁<br/>膨胀为 ObjectMonitor<br/>未抢到的进 EntryList 阻塞<br/>靠 OS mutex，有上下文切换开销"]
+flowchart LR
+    ASYNC["异步处理<br/>注册→发短信→发邮件<br/>非核心流程异步化"]
+    DECOUPLE["解耦<br/>订单系统不直接调库存<br/>通过 MQ 中转"]
+    PEAK["削峰填谷<br/>秒杀请求进 MQ 排队<br/>后端按自己速度消费"]
 
-    style NOLOCK fill:#0d3300,stroke:#66bb6a,color:#fff
-    style BIASED fill:#1a237e,stroke:#42a5f5,color:#fff
-    style LIGHT fill:#e65100,stroke:#ff9800,color:#fff
-    style HEAVY fill:#b71c1c,stroke:#ef5350,color:#fff
+    ASYNC --> MQ["📨 Message Queue"]
+    DECOUPLE --> MQ
+    PEAK --> MQ
 ```
 
-### synchronized vs ReentrantLock
+### Kafka 核心概念
 
-```mermaid
-graph TB
-    subgraph SYN["synchronized"]
-        S1["JVM C++ 实现<br/>monitorenter/exit"]
-        S2["自动释放 ✅<br/>异常也释放 ✅"]
-        S3["不可中断 ❌"]
-        S4["不支持超时 ❌"]
-        S5["只有非公平锁"]
-        S6["1个条件变量<br/>(wait/notify)"]
-    end
-
-    subgraph LOCK["ReentrantLock"]
-        L1["Java API + AQS"]
-        L2["手动释放 ⚠️<br/>必须 finally unlock"]
-        L3["lockInterruptibly() ✅"]
-        L4["tryLock(timeout) ✅"]
-        L5["可选公平/非公平"]
-        L6["多个 Condition<br/>精细线程调度"]
-    end
-
-    CHOICE["💡 90% 用 synchronized<br/>需要可中断/超时/多条件 → Lock"]
-    SYN --> CHOICE
-    LOCK --> CHOICE
-
-    style SYN fill:#1a237e,stroke:#42a5f5,color:#fff
-    style LOCK fill:#4a148c,stroke:#ce93d8,color:#fff
 ```
+Producer → Topic(分区0, 分区1, 分区2...) → Consumer Group
+              ↓             ↓             ↓
+           Partition0   Partition1   Partition2 (每个分区有序)
+              ↓             ↓             ↓
+           Offset 0      Offset 0      Offset 0
+           Offset 1      Offset 1      Offset 1
+           ...
+
+每个 Partition:
+  - 一个 Leader + N 个 Follower（ISR 机制）
+  - 消息按 Offset 顺序追加写入
+  - 同一个 Partition 内消息有序
+```
+
+### Kafka vs RabbitMQ
+
+| | Kafka | RabbitMQ |
+|------|-------|----------|
+| 设计 | 分布式日志（海量吞吐） | 消息代理（灵活路由） |
+| 吞吐 | **百万级 QPS** | 万级 QPS |
+| 消息顺序 | 分区内有序 ✅ | 单个队列内有序 |
+| 消费模式 | Pull（消费者拉） | Push（Broker 推） |
+| 典型场景 | 日志收集、流处理、大数据 | 业务解耦、任务分发 |
+
+### 消息丢失怎么解决
+
+| 环节 | 问题 | 解决 |
+|------|------|------|
+| 生产端 | 发送失败 | acks=all + 重试机制 |
+| Broker | 宕机丢数据 | 多副本 + min.insync.replicas ≥ 2 |
+| 消费端 | 未处理完就提交 offset | 先处理再手动提交 |
+
+### 消息重复消费怎么处理
+
+- **幂等性设计**：数据库唯一键、Redis setnx、业务状态机
+- **Kafka 消费者**：关闭自动提交，手动维护 offset
 
 ---
 
-## 五、volatile + JMM
+## 九、分布式系统
 
-### JMM 内存模型
+### CAP 定理
+
+```
+分布式系统在网络分区发生时，只能三选二：
+
+  C (Consistency)    — 所有节点同一时刻数据一致
+  A (Availability)   — 每个请求都能收到非错误响应
+  P (Partition)      — 网络分区时系统仍可用
+
+  P 无法避免 → 实际是 CP 还是 AP 的选择：
+    CP: ZooKeeper、etcd（强一致，牺牲可用性）
+    AP: Eureka、Cassandra（高可用，最终一致性）
+
+  → CAP 太严格，BASE 才是互联网业务的实际方案
+```
+
+### BASE 理论
+
+| 字母 | 含义 | 解释 |
+|------|------|------|
+| **BA** | Basically Available | 允许降级（双11只让看订单不让改） |
+| **S** | Soft State | 允许中间状态（数据正在同步） |
+| **E** | Eventually Consistent | 最终一致（朋友圈晚 1 秒看到无所谓） |
+
+### 分布式事务解决方案
+
+| 方案 | 原理 | 适用 |
+|------|------|------|
+| **2PC** | 两阶段提交（预提交 → 提交） | 强一致场景，性能差 |
+| **TCC** | Try-Confirm-Cancel | 资金类业务 |
+| **本地消息表** | 业务 + 消息一起写入本地，定时重试 | 最终一致 |
+| **RocketMQ 事务消息** | Broker 回查生产者 | 阿里系 |
+| **Seata AT** | 自动生成回滚 SQL | **最常用**，对代码无侵入 |
+
+---
+
+## 十、MyBatis
+
+### #{} vs ${}
+
+| | `#{}` | `${}` |
+|------|-------|-------|
+| 方式 | **预编译占位符** | 字符串拼接 |
+| SQL | `SELECT * FROM user WHERE id = ?` | `SELECT * FROM user WHERE id = 1` |
+| SQL 注入 | **安全** ✅ | **危险** ❌ |
+| 适用 | 99% 场景 | 动态表名/列名、ORDER BY |
+
+### MyBatis 核心流程
 
 ```mermaid
 flowchart LR
-    subgraph T1["🧵 线程1"]
-        WM1["工作内存<br/>(CPU缓存)"]
-    end
-    subgraph MAIN["📍 主内存"]
-        X["x = 10"]
-        Y["y = 20"]
-    end
-    subgraph T2["🧵 线程2"]
-        WM2["工作内存<br/>(CPU缓存)"]
-    end
-
-    WM1 <-->|"read / write"| MAIN
-    WM2 <-->|"read / write"| MAIN
-
-    PROBLEM["⚠️ 问题：
-    线程1改了x没刷回主内存
-    → 线程2读到旧值(可见性问题)
-    → CPU/编译器重排指令(有序性问题)"]
-
-    style MAIN fill:#0d3300,stroke:#66bb6a,color:#fff
-    style PROBLEM fill:#b71c1c,stroke:#ef5350,color:#fff
+    CONFIG["mybatis-config.xml<br/>+ Mapper.xml"] --> SQLSESSION["SqlSessionFactory<br/>→ SqlSession"]
+    SQLSESSION --> EXECUTOR["Executor<br/>（执行器）"]
+    EXECUTOR --> STATEMENT["StatementHandler<br/>（参数设置+SQL执行）"]
+    STATEMENT --> RESULT["ResultSetHandler<br/>（结果映射）"]
 ```
 
-### 四种内存屏障
+### MyBatis 缓存
 
-```mermaid
-flowchart LR
-    subgraph "volatile 写"
-        SW["StoreStore 屏障"] --> VW["写 volatile"]
-        VW --> SL["StoreLoad 屏障<br/>(最重的屏障)"]
-    end
+| | 一级缓存 | 二级缓存 |
+|------|------|------|
+| 范围 | SqlSession 内 | Mapper（namespace）级别 |
+| 默认 | **默认开启** | 需手动开启 |
+| 清除 | 执行 insert/update/delete 时清空 | 同上，可跨 SqlSession |
 
-    subgraph "volatile 读"
-        LL["LoadLoad 屏障"] --> VR["读 volatile"]
-        VR --> LS["LoadStore 屏障"]
-    end
-```
+---
 
-### DCL 为什么两次判空 + volatile
+## 十一、设计模式在 Spring 中的应用
+
+| 模式 | 定义 | Spring 中的应用 |
+|------|------|----------------|
+| **单例** | 全局唯一实例 | Spring Bean 默认 scope=singleton |
+| **工厂** | 工厂类创建对象 | `BeanFactory`、`ApplicationContext` |
+| **代理** | 代理对象控制访问 | **AOP** — JDK 动态代理 / CGLIB |
+| **模板方法** | 父类定义骨架，子类实现细节 | `JdbcTemplate`、`RestTemplate` |
+| **观察者** | 一对多通知 | `ApplicationListener`、`@EventListener` |
+| **策略** | 算法族可互换 | `DispatcherServlet` 选择 Handler |
+| **适配器** | 接口转换 | `HandlerAdapter` |
+| **装饰器** | 动态添加功能 | `BeanDefinitionDecorator`、`ServerHttpRequestDecorator` |
+
+---
+
+## 十二、计算机网络
+
+### TCP 三次握手 + 四次挥手
 
 ```mermaid
 sequenceDiagram
-    participant T1 as 🧵 线程1
-    participant INST as Singleton.instance
-    participant T2 as 🧵 线程2
+    participant C as 客户端
+    participant S as 服务器
 
-    T1->>INST: ① if (instance == null) → true
-    T1->>T1: ② synchronized 获取锁
-    T1->>INST: ③ if (instance == null) → true ← 第二重检查
-    T1->>INST: ④ instance = new Singleton()
-    Note over T1,INST: ①分配内存 ②初始化 ③赋值引用<br/>volatile 防止②③重排!
+    Note over C,S: === 三次握手 ===
+    C->>S: SYN=1, seq=x
+    Note over C: SYN_SENT
+    S->>C: SYN=1, ACK=1, seq=y, ack=x+1
+    Note over S: SYN_RCVD
+    C->>S: ACK=1, seq=x+1, ack=y+1
+    Note over C,S: ESTABLISHED ✅
 
-    T2->>INST: if (instance == null) → false
-    Note over T2: 拿到完整初始化好的对象 ✅
-
-    T1->>T1: ⑤ synchronized 释放锁
+    Note over C,S: === 四次挥手 ===
+    C->>S: FIN=1, seq=u
+    Note over C: FIN_WAIT_1
+    S->>C: ACK=1, seq=v, ack=u+1
+    Note over S: CLOSE_WAIT
+    S->>C: FIN=1, seq=w, ack=u+1
+    Note over S: LAST_ACK
+    C->>S: ACK=1, seq=u+1, ack=w+1
+    Note over C: TIME_WAIT (2MSL) → CLOSED
 ```
+
+> **为什么三次不是两次**：防止已失效的连接请求到达服务器。如果只有两次，服务器收到旧 SYN 就建立连接，浪费资源。
+> **为什么四次**：TCP 全双工，双方都要 FIN + ACK。
+
+### HTTP vs HTTPS
+
+| | HTTP | HTTPS |
+|------|------|-------|
+| 加密 | ❌ 明文 | ✅ TLS 加密 |
+| 端口 | 80 | 443 |
+| 证书 | 无 | CA 证书验证 |
+| 速度 | 快 | 稍慢（握手开销） |
+
+### HTTP 状态码
+
+| 状态码 | 含义 | 举例 |
+|:--:|------|------|
+| 200 | OK | 请求成功 |
+| 301 | 永久重定向 | 域名迁移 |
+| 302 | 临时重定向 | 登录后跳转 |
+| 400 | 请求错误 | 参数不对 |
+| 401 | 未认证 | 没登录 |
+| 403 | 禁止访问 | 没权限 |
+| 404 | 未找到 | URL 不存在 |
+| 500 | 服务器错误 | 代码异常 |
+| 502 | 网关错误 | Nginx 连不上后端 |
+| 503 | 服务不可用 | 服务挂了或在维护 |
 
 ---
 
-## 六、AQS — JUC 的地基
+## 十三、系统设计 — 怎么答设计题
 
-### CLH 队列结构
-
-```mermaid
-flowchart LR
-    HEAD["head<br/>🔹 哨兵节点<br/>(不存线程)"] -->|"next"| N1["Node(T1)<br/>waitStatus=SIGNAL<br/>🔔 需要唤醒后继"]
-    N1 -->|"next"| N2["Node(T2)<br/>waitStatus=SIGNAL<br/>🔔 需要唤醒后继"]
-    N2 -->|"next"| N3["Node(T3)<br/>waitStatus=0<br/>队尾"]
-    N3 --> TAIL["tail"]
-
-    N1 -.->|"prev ←"| HEAD
-    N2 -.->|"prev ←"| N1
-    N3 -.->|"prev ←"| N2
-
-    style HEAD fill:#e65100,stroke:#ff9800,color:#fff
-    style N1 fill:#1a237e,stroke:#42a5f5,color:#fff
-    style N2 fill:#1a237e,stroke:#42a5f5,color:#fff
-    style N3 fill:#1a237e,stroke:#42a5f5,color:#fff
-    style TAIL fill:#e65100,stroke:#ff9800,color:#fff
-```
-
-### 公平锁 vs 非公平锁
+### 面试官问"设计一个秒杀系统"→ 按这个框架答
 
 ```mermaid
 flowchart TD
-    TRY["tryAcquire(1)"]
-    TRY --> FAIR{"公平锁?"}
-    FAIR -->|"✅ 公平"| CHECKQUEUE{"hasQueuedPredecessors()?<br/>队列里有人在等?"}
-    CHECKQUEUE -->|"有人等"| FAIL["排队去"]
-    CHECKQUEUE -->|"没人等"| CAS_FAIR["CAS state 0→1"]
-    FAIR -->|"❌ 非公平"| CAS_UNFAIR["直接 CAS state 0→1"]
-    CAS_FAIR --> SUCCESS["🔒 获得锁"]
-    CAS_UNFAIR --> SUCCESS
-
-    style FAIL fill:#4a0000,stroke:#ef5350,color:#fff
-    style SUCCESS fill:#0d3300,stroke:#66bb6a,color:#fff
+    STEP1["① 需求澄清<br/>QPS预估？库存量？超卖怎么办？"]
+    STEP1 --> STEP2["② 架构总览<br/>前端→CDN→Nginx→网关→服务→DB/Redis"]
+    STEP2 --> STEP3["③ 核心难点逐个击破"]
+    STEP3 --> P1["动态化：CDN+静态化"]
+    STEP3 --> P2["削峰：Redis预扣库存+MQ异步下单"]
+    STEP3 --> P3["防超卖：Redis DECR 原子操作 + DB 乐观锁"]
+    STEP3 --> P4["限流：令牌桶/漏桶，Nginx limit_req"]
+    STEP3 --> P5["服务隔离：核心链路独立部署，非核心降级"]
 ```
+
+### 设计题的万能公式
+
+```
+1. 先聊需求（别上来就画图）
+2. 给一个简单的整体架构（单机→分布式逐步演进）
+3. 识别 2-3 个核心难点，逐个给出方案
+4. 每个方案讲 trade-off（选 A 的好处 + 为什么不选 B）
+5. 最后总结一句
+```
+
+**面试话术**：「设计秒杀系统，我先从最简单的方案开始：一个服务 + MySQL 扣库存。然后逐步加 Redis 预扣库存解决并发、加 MQ 异步下单削峰、加限流防刷。每个组件解决一个具体问题，不要为了分布式而分布式。」
 
 ---
 
-## 七、JVM GC — 从算法到 G1
+## 十四、AI / Agent 速查（面试加分项）
 
-### 四种 GC 算法
+> 详细版本见前几章。这里给精简版。
 
-```mermaid
-flowchart LR
-    subgraph MS["标记-清除"]
-        M1["██░░██░░░░██"] --> M2["██  ██    ██"]
-        M3["碎片化 ❌"]
-    end
-    subgraph MC["标记-复制 (新生代)"]
-        C1["Eden ░░░███░"] --> C2["空 | Survivor ████"]
-        C3["无碎片 ✅ 浪费空间 ⚠️"]
-    end
-    subgraph MCP["标记-整理 (老年代)"]
-        P1["██░░██░░░░██"] --> P2["████████░░░░"]
-        P3["无碎片 ✅ 移动开销 ⚠️"]
-    end
+### Agent = LLM + Memory + Tools + Planning
 
-    style MS fill:#4a0000,stroke:#ef5350,color:#fff
-    style MC fill:#0d3300,stroke:#66bb6a,color:#fff
-    style MCP fill:#1a237e,stroke:#42a5f5,color:#fff
-```
+- LLM = 大脑（推理决策）
+- Memory = 笔记本（短期对话 + 长期向量库）
+- Tools = 手（Function Calling 调用外部 API）
+- Planning = 做事方法（ReAct / Plan-Execute / Reflection）
 
-### 新生代 vs 老年代
+### RAG 一句话
 
-```mermaid
-flowchart TB
-    subgraph HEAP["堆 Heap"]
-        subgraph YOUNG["新生代 Young"]
-            EDEN["Eden (80%)<br/>🆕 新对象出生地"]
-            S0["S0 (10%)"]
-            S1["S1 (10%)"]
-        end
-        OLD["老年代 Old<br/>🏛️ 长命对象<br/>GC 15次没死的"]
+**先搜再答**：用户问题 → Embedding 向量化 → 向量数据库检索 → 拼入 Prompt → LLM 生成有据可查的答案。
 
-        EDEN -->|"Minor GC<br/>复制到 Survivor"| S0
-        S0 -->|"多次 GC 仍存活<br/>晋升到老年代"| OLD
-    end
+### Spring AI 一句话
 
-    style EDEN fill:#0d3300,stroke:#66bb6a,color:#fff
-    style OLD fill:#4a148c,stroke:#ce93d8,color:#fff
-```
-
-### G1 收集器核心
-
-```mermaid
-flowchart TB
-    subgraph G1["G1 堆布局"]
-        R1["Eden"]
-        R2["Eden"]
-        R3["Survivor"]
-        R4["Old"]
-        R5["Eden"]
-        R6["Humongous<br/>(大对象)"]
-        R7["Old"]
-        R8["Eden"]
-
-        GC["🔄 每次 GC：选垃圾最多的 Region 回收<br/>不要求一次回收整个老年代<br/>停顿时间可控 ✅"]
-    end
-
-    style R4 fill:#4a0000,stroke:#ef5350,color:#fff
-    style R7 fill:#4a0000,stroke:#ef5350,color:#fff
-    style R6 fill:#e65100,stroke:#ff9800,color:#fff
-```
+Spring Boot 里注入 `ChatClient`，和用 `JdbcTemplate` 一样自然。改 application.yml 就能换模型。
 
 ---
 
-## 八、Spring IoC & AOP
+## 十五、面试现场 — 话术 + 反问
 
-### AOP 代理原理
+### 自我介绍（60 秒版）
 
-```mermaid
-flowchart TB
-    TARGET["目标对象<br/>UserServiceImpl"]
+> 「面试官好，我是 XXX，X 年 Java 后端开发。技术栈 Spring Boot + MySQL + Redis + Kafka。熟悉并发编程、JVM 调优和分布式系统设计。最近在学 AI/Agent，用 Spring AI 做过内部系统集成，自建过 RAG 知识库。我认为 AI 不是取代 Java，而是让 Java 系统加一层智能能力。这个岗位需要的技术栈和我的方向很匹配。」
 
-    TARGET -->|"实现了接口"| JDK["JDK 动态代理<br/>$Proxy123 implements UserService"]
-    TARGET -->|"没实现接口"| CGLIB["CGLIB 代理<br/>UserService$$Enhancer<br/>extends UserServiceImpl<br/>⚠️ final方法不能代理"]
+### 反问面试官的黄金三问
 
-    JDK --> AOP_CHAIN["AOP 调用链"]
-    CGLIB --> AOP_CHAIN
+1. **「团队目前技术栈是什么样的？主要在用哪些中间件？」** → 顺便展示你的技术广度
+2. **「这个岗位未来半年最希望我解决什么技术难题？」** → 显示你关注价值产出
+3. **「团队对 AI 有什么规划吗？」** → 展示你的差异化优势
 
-    AOP_CHAIN --> BEFORE["@Before"]
-    BEFORE --> TARGET_METHOD["执行业务方法"]
-    TARGET_METHOD --> AFTER["@After"]
-    AFTER --> AROUND["@Around"]
+### 被问"你有什么想问的"时 — 千万别问的
 
-    style JDK fill:#0d3300,stroke:#66bb6a,color:#fff
-    style CGLIB fill:#1a237e,stroke:#42a5f5,color:#fff
-```
-
-### @Transactional 失效两大场景
-
-```mermaid
-flowchart TD
-    SCENE1["❌ 场景1: 同类方法调用<br/>this.methodB() 不经过代理"]
-    SCENE2["❌ 场景2: 异常被 try-catch 吞了<br/>Spring 感知不到异常"]
-
-    SCENE1 --> FIX1["✅ 解决: 注入自己<br/>或抽到另一个 Service"]
-    SCENE2 --> FIX2["✅ 解决: catch 里手动回滚<br/>TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()"]
-
-    style SCENE1 fill:#b71c1c,stroke:#ef5350,color:#fff
-    style SCENE2 fill:#b71c1c,stroke:#ef5350,color:#fff
-    style FIX1 fill:#0d3300,stroke:#66bb6a,color:#fff
-    style FIX2 fill:#0d3300,stroke:#66bb6a,color:#fff
-```
+- ❌ 「公司加班多吗？」（入职后问 HR）
+- ❌ 「薪资还能谈吗？」（和 HR 谈）
+- ❌ 「这个技术你们为什么用？」（听起来像在质疑）
 
 ---
 
-## 九、RAG — 企业 AI 落地首选
+## 速查清单
 
-### 完整流水线
-
-```mermaid
-flowchart TB
-    subgraph OFFLINE["⚙️ 离线阶段：知识入库"]
-        DOC["📄 PDF/Word/网页"]
-        DOC --> LOAD["Loader 加载"]
-        LOAD --> CHUNK["Chunking 切块<br/>每块 500-1000 字符<br/>重叠 10-20%"]
-        CHUNK --> EMBED["Embedding 向量化<br/>文本 → 1536维向量"]
-        EMBED --> STORE["向量数据库<br/>Chroma / Milvus / pgvector"]
-    end
-
-    subgraph ONLINE["⚡ 在线阶段：用户提问"]
-        QUERY["❓ 用户问题<br/>'公积金怎么提取'"]
-        QUERY --> QEMBED["问题 → 向量"]
-        QEMBED --> SEARCH["🔍 向量相似度搜索<br/>Top-K 最相关文档"]
-        SEARCH --> PROMPT["拼入 Prompt<br/>'参考以下文档回答...'"]
-        PROMPT --> LLM["🤖 LLM 生成答案<br/>'根据规定，您需要...'"]
-    end
-
-    STORE -.->|"检索"| SEARCH
-
-    style OFFLINE fill:#1a237e,stroke:#42a5f5,color:#fff
-    style ONLINE fill:#0d3300,stroke:#66bb6a,color:#fff
-    style LLM fill:#4a148c,stroke:#ce93d8,color:#fff
-```
-
-### RAG vs 微调
-
-```mermaid
-flowchart LR
-    RAG["RAG<br/>✅ 秒级更新<br/>✅ 数据不出服务器<br/>✅ 幻觉低<br/>✅ 成本低<br/>✅ 90%企业首选"]
-    FT["微调 Fine-tuning<br/>⚠️ 天级训练<br/>⚠️ 数据需外传<br/>⚠️ 仍可能编造<br/>⚠️ GPU成本高<br/>⚠️ 仅RAG不够时补充"]
-
-    RAG -->|"首选"| CHOOSE["💡 企业选型"]
-    FT -->|"补充"| CHOOSE
-
-    style RAG fill:#0d3300,stroke:#66bb6a,color:#fff
-    style FT fill:#e65100,stroke:#ff9800,color:#fff
-```
+| 模块 | 必背知识点 |
+|------|-----------|
+| Java 基础 | HashMap 位运算+红黑树、ConcurrentHashMap CAS+synchronized、线程池 7 参数+状态机 |
+| 并发 | synchronized 锁升级、volatile 内存屏障、AQS CLH 队列、CAS ABA 问题 |
+| JVM | 内存 5 区、GC 4 算法、Minor vs Full GC、G1 Region |
+| Spring | IoC/DI、AOP 代理方式、Bean 生命周期三级缓存、@Transactional 失效场景 |
+| MySQL | B+Tree 为什么好、最左前缀、ACID+隔离级别、Explain 关键字段 |
+| Redis | 5 种类型、缓存三问题、RDB vs AOF、分布式锁 |
+| MQ | 削峰/解耦/异步、Kafka 分区+ISR、消息丢失/重复解决方案 |
+| 分布式 | CAP vs BASE、分布式事务方案（Seata/TCC/消息表） |
+| MyBatis | #{} vs ${}、核心流程、一二级缓存 |
+| 设计模式 | 单例/工厂/代理/模板/策略在 Spring 中的应用 |
+| 网络 | TCP 三次握手四次挥手、HTTP 状态码 |
+| 系统设计 | 万能答题公式 → 需求→架构→难点→trade-off |
+| AI | Agent 四层架构、RAG 流水线、Spring AI 三大抽象 |
 
 ---
 
-## 十、Agent = LLM × 记忆 × 工具 × 规划
-
-### 四层架构
-
-```mermaid
-flowchart TB
-    USER["👤 用户给目标"] --> AGENT
-
-    subgraph AGENT["🤖 AI Agent"]
-        PLANNING["🧠 规划层<br/>ReAct推理 / 任务分解 / 反思"]
-        MEMORY["💾 记忆层<br/>短期(对话上下文)<br/>长期(向量数据库)"]
-        TOOLS["🔧 工具层<br/>Function Calling<br/>搜索 / 代码 / API"]
-        LOOP["🔄 执行循环<br/>Observe → Think → Act"]
-    end
-
-    PLANNING <--> MEMORY
-    PLANNING <--> TOOLS
-    LOOP --> PLANNING
-
-    style PLANNING fill:#4a148c,stroke:#ce93d8,color:#fff
-    style MEMORY fill:#1a237e,stroke:#42a5f5,color:#fff
-    style TOOLS fill:#0d3300,stroke:#66bb6a,color:#fff
-    style LOOP fill:#e65100,stroke:#ff9800,color:#fff
-```
-
-### Function Calling 数据流
-
-```mermaid
-sequenceDiagram
-    participant User as 👤 用户
-    participant LLM as 🤖 LLM
-    participant Code as ⚙️ 你的代码
-    participant Tool as 🔧 真实工具
-
-    User->>LLM: "帮我查张三的订单"
-    LLM->>Code: 💭 返回 tool_calls:<br/>{function: "query_order",<br/> args: {user: "张三"}}
-    Note over Code: LLM 不直接执行工具！<br/>只输出"想调用什么"
-    Code->>Tool: SELECT * FROM orders<br/>WHERE user='张三'
-    Tool-->>Code: [{id:123, amount:99, status:'已发货'}]
-    Code-->>LLM: 工具结果返回给 LLM
-    LLM->>User: "张三有一笔订单（编号123）<br/>金额99元，状态已发货"
-```
-
-### 三大架构模式
-
-```mermaid
-flowchart LR
-    REACT["ReAct<br/>Thought→Action→Observe<br/>适合多步推理+工具调用"]
-    PLAN["Plan-Execute<br/>先制定完整计划→逐步执行<br/>适合复杂可预测任务"]
-    REFLECT["Reflection<br/>执行→自我评价→修正<br/>适合迭代优化（写代码）"]
-
-    REACT --> CHOOSE["根据任务复杂度<br/>选择合适的模式"]
-    PLAN --> CHOOSE
-    REFLECT --> CHOOSE
-
-    style REACT fill:#1a237e,stroke:#42a5f5,color:#fff
-    style PLAN fill:#0d3300,stroke:#66bb6a,color:#fff
-    style REFLECT fill:#4a148c,stroke:#ce93d8,color:#fff
-```
-
----
-
-## 十一、现场话术模板
-
-### 自我介绍（60s）
-
-> 「面试官好，我是 XXX，X 年 Java 后端开发。主要技术栈 Spring Boot + MySQL + Redis，熟悉并发编程和 JVM 调优。最近一年系统学习 AI/Agent，做过几个实战项目——用 Spring AI 集成智能问答、自建 RAG 知识库、DeepSeek API 项目。AI 不是取代 Java，而是给 Java 系统加一层智能能力。这个岗位正好是我在深入的方向。」
-
-### 反问面试官
-
-- 「团队目前 AI 在哪些场景落地了？」
-- 「Java 系统接 AI，倾向 Spring AI 还是自研？」
-- 「这个岗位未来一年最希望我在 AI 方向做到什么程度？」
-
----
-
-## 十二、速查清单
-
-### Java（必背 8 题）
-
-- [ ] HashMap：位运算 + 扰动函数 + 红黑树 + 扩容免重 hash
-- [ ] ConcurrentHashMap：CAS + synchronized 锁单桶 + 读无锁 + 分段计数
-- [ ] 线程池：7 参数 + 执行流程 + Worker 取任务 + 拒绝策略
-- [ ] synchronized：Mark Word + 锁升级四阶段
-- [ ] volatile：可见性+有序性+内存屏障 + DCL
-- [ ] AQS：state + CLH 队列 + 公平 vs 非公平
-- [ ] JVM GC：四种算法 + Minor/Full GC + G1
-- [ ] Spring AOP：JDK vs CGLIB + @Transactional 失效
-
-### AI（加分 3 题）
-
-- [ ] Agent = LLM + Memory + Tools + Planning
-- [ ] RAG 离线+在线流水线 + RAG vs 微调
-- [ ] Function Calling 数据流 + Spring AI 三大抽象
-
----
-
-> 💪 你比 90% 候选人多的是：Java 八股有源码级理解 + AI 有真实项目。把图画到脑子里，面试时直接画给面试官看。
+> 🔥 你不是在背八股，你是在用工程经验包装基础知识。Java 全栈 + AI = 大部分人没有的组合优势。

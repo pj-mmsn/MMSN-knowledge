@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01-Projects/面试突击手册-Java+AI.md",
+                "file": "02-Areas/Java/持久化.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "面试突击手册-Java+AI"
+              "title": "持久化"
             }
           }
         ]
@@ -185,10 +185,11 @@
   },
   "active": "ff5083ba0a0bb8af",
   "lastOpenFiles": [
+    "02-Areas/Java/_模板.md",
+    "01-Projects/面试突击手册-Java+AI.md",
     "01-Projects/图解-锁升级与MarkWord.html",
     "01-Projects/图解-HashMap结构.html",
     "01-Projects/8周Agent学习计划.md",
-    "01-Projects/面试突击手册-Java+AI.md",
     "03-Resources/JavaGuide/README.md",
     "04-Archives/视频工作室.md",
     "02-Areas/AI与Agent/_index.md",
@@ -231,7 +232,6 @@
     "03-Resources/JavaGuide/docs/system-design/security/images/design-of-authority-system/new-authority-system-design-access-flow-chart.png",
     "03-Resources/JavaGuide/docs/system-design/framework/spring/images/spring-transaction",
     "03-Resources/JavaGuide/docs/system-design/framework/spring/images/spring-annotations",
-    "03-Resources/JavaGuide/docs/system-design/framework/spring/images/mvc-model2.drawio",
     "未命名.canvas"
   ]
 }
