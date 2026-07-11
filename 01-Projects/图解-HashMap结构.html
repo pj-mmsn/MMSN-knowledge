@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HashMap 内部结构图解</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#020617;color:#e2e8f0;font-family:'JetBrains Mono',monospace;padding:40px}
+.container{max-width:1200px;margin:0 auto}
+.header{display:flex;align-items:center;gap:12px;margin-bottom:32px}
+.dot{width:10px;height:10px;border-radius:50%;background:#4fc3f7;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-size:1.8rem;font-weight:700}
+h2{font-size:1.1rem;color:#94a3b8;font-weight:400}
+.card{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:32px;margin-bottom:24px}
+.card-title{font-size:1rem;font-weight:600;color:#4fc3f7;margin-bottom:20px}
+svg{display:block;width:100%}
+.legend{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:0.8rem;color:#94a3b8}
+.legend-swatch{width:14px;height:14px;border-radius:3px}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="dot"></div>
+    <div>
+      <h1>HashMap 数据结构 & 位运算原理</h1>
+      <h2>JDK 1.8+ · 数组+链表+红黑树 · 面试图解</h2>
+    </div>
+  </div>
+
+  <!-- Diagram 1: Structure -->
+  <div class="card">
+    <div class="card-title">📐 整体结构 — 当链表 ≥8 且数组 ≥64 时树化为红黑树</div>
+    <svg viewBox="0 0 1100 520">
+      <rect width="1100" height="520" fill="#0f172a" rx="8"/>
+      <!-- Grid -->
+      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M40 0L0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+      </pattern>
+      <rect width="1100" height="520" fill="url(#grid)"/>
+
+      <!-- table array -->
+      <rect x="30" y="30" width="1040" height="70" rx="6" fill="#1a1a2e" stroke="#4fc3f7" stroke-width="1.5"/>
+      <text x="550" y="58" text-anchor="middle" fill="#4fc3f7" font-size="13" font-weight="700">table[] 桶数组  —  容量必须是 2 的幂（默认 16）</text>
+      <text x="550" y="78" text-anchor="middle" fill="#94a3b8" font-size="11">用 (n-1) &amp; hash 代替 hash % n 定位桶下标  ·  位与比取模快 30 倍</text>
+
+      <!-- bucket cells -->
+      <rect x="40" y="110" width="57" height="40" rx="4" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+      <text x="68" y="135" text-anchor="middle" fill="#94a3b8" font-size="11">[0]</text>
+      <rect x="102" y="110" width="57" height="40" rx="4" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+      <text x="130" y="135" text-anchor="middle" fill="#94a3b8" font-size="11">[1]</text>
+
+      <!-- bucket 2 with linked list -->
+      <rect x="164" y="110" width="57" height="40" rx="4" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+      <text x="192" y="135" text-anchor="middle" fill="#34d399" font-size="11" font-weight="600">[2]</text>
+
+      <!-- bucket 3 -->
+      <rect x="226" y="110" width="57" height="40" rx="4" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+      <text x="254" y="135" text-anchor="middle" fill="#94a3b8" font-size="11">[3]</text>
+
+      <!-- dots -->
+      <text x="310" y="135" fill="#64748b" font-size="14">···</text>
+
+      <!-- bucket 15 with red-black tree -->
+      <rect x="350" y="110" width="57" height="40" rx="4" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="378" y="135" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="600">[15]</text>
+
+      <text x="410" y="135" fill="#64748b" font-size="14">···  [···]</text>
+
+      <!-- LinkedList on bucket 2 -->
+      <line x1="192" y1="150" x2="192" y2="175" stroke="#34d399" stroke-width="1.5"/>
+      <rect x="145" y="175" width="94" height="38" rx="4" fill="rgba(6,78,59,0.3)" stroke="#34d399" stroke-width="1"/>
+      <text x="192" y="192" text-anchor="middle" fill="#34d399" font-size="10">Node</text>
+      <text x="192" y="206" text-anchor="middle" fill="#a7f3d0" font-size="9">k1,v1</text>
+
+      <line x1="192" y1="213" x2="192" y2="235" stroke="#34d399" stroke-width="1.5"/>
+      <rect x="145" y="235" width="94" height="38" rx="4" fill="rgba(6,78,59,0.3)" stroke="#34d399" stroke-width="1"/>
+      <text x="192" y="252" text-anchor="middle" fill="#34d399" font-size="10">Node</text>
+      <text x="192" y="266" text-anchor="middle" fill="#a7f3d0" font-size="9">k2,v2</text>
+
+      <line x1="192" y1="273" x2="192" y2="295" stroke="#34d399" stroke-width="1.5"/>
+      <rect x="145" y="295" width="94" height="38" rx="4" fill="rgba(6,78,59,0.3)" stroke="#34d399" stroke-width="1"/>
+      <text x="192" y="312" text-anchor="middle" fill="#34d399" font-size="10">Node</text>
+      <text x="192" y="326" text-anchor="middle" fill="#a7f3d0" font-size="9">k3,v3</text>
+
+      <!-- red-black tree on bucket 15 -->
+      <line x1="378" y1="150" x2="378" y2="180" stroke="#fbbf24" stroke-width="1.5"/>
+
+      <!-- root -->
+      <circle cx="378" cy="200" r="16" fill="#1a1a1a" stroke="#fff" stroke-width="2"/>
+      <text x="378" y="205" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">K1</text>
+
+      <!-- left child -->
+      <line x1="365" y1="214" x2="340" y2="245" stroke="#fbbf24" stroke-width="1"/>
+      <circle cx="330" cy="255" r="16" fill="#cc0000" stroke="#ff4444" stroke-width="2"/>
+      <text x="330" y="260" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">K2</text>
+
+      <!-- right child -->
+      <line x1="391" y1="214" x2="416" y2="245" stroke="#fbbf24" stroke-width="1"/>
+      <circle cx="426" cy="255" r="16" fill="#cc0000" stroke="#ff4444" stroke-width="2"/>
+      <text x="426" y="260" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">K3</text>
+
+      <!-- grandchildren -->
+      <line x1="318" y1="269" x2="305" y2="300" stroke="#fbbf24" stroke-width="0.8"/>
+      <circle cx="298" cy="310" r="13" fill="#1a1a1a" stroke="#888" stroke-width="1.5"/>
+      <text x="298" y="314" text-anchor="middle" fill="#94a3b8" font-size="9">K4</text>
+
+      <line x1="342" y1="269" x2="355" y2="300" stroke="#fbbf24" stroke-width="0.8"/>
+      <circle cx="362" cy="310" r="13" fill="#1a1a1a" stroke="#888" stroke-width="1.5"/>
+      <text x="362" y="314" text-anchor="middle" fill="#94a3b8" font-size="9">K5</text>
+
+      <!-- Labels -->
+      <text x="192" y="360" text-anchor="middle" fill="#34d399" font-size="11" font-weight="600">← 链表 (拉链法)</text>
+      <text x="192" y="377" text-anchor="middle" fill="#94a3b8" font-size="10">查找 O(n)</text>
+
+      <text x="378" y="360" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="600">← 红黑树</text>
+      <text x="378" y="377" text-anchor="middle" fill="#94a3b8" font-size="10">查找 O(log n) · 树化条件: 链表≥8 且 数组≥64</text>
+
+      <!-- Legend -->
+      <rect x="570" y="175" width="14" height="14" rx="3" fill="#1a1a1a" stroke="#fff" stroke-width="1.5"/>
+      <text x="590" y="187" fill="#94a3b8" font-size="10">黑节点</text>
+      <rect x="660" y="175" width="14" height="14" rx="3" fill="#cc0000" stroke="#ff4444" stroke-width="1.5"/>
+      <text x="680" y="187" fill="#94a3b8" font-size="10">红节点</text>
+
+      <!-- Bit operation explanation -->
+      <rect x="570" y="220" width="500" height="170" rx="6" fill="rgba(76,29,149,0.2)" stroke="#a78bfa" stroke-width="1"/>
+      <text x="820" y="245" text-anchor="middle" fill="#a78bfa" font-size="12" font-weight="700">位运算: (n-1) &amp; hash</text>
+      <text x="590" y="270" fill="#e2e8f0" font-size="11">hash = key.hashCode() ^ (key.hashCode() &gt;&gt;&gt; 16)</text>
+      <text x="590" y="290" fill="#94a3b8" font-size="10">例: hash=214(0b11010110)  n=16  n-1=15(0b00001111)</text>
+      <text x="590" y="310" fill="#e2e8f0" font-size="11" font-family="monospace">  1101 0110  (214)</text>
+      <text x="590" y="328" fill="#e2e8f0" font-size="11" font-family="monospace">&amp; 0000 1111  (15)</text>
+      <text x="590" y="346" fill="#e2e8f0" font-size="11" font-family="monospace">───────────</text>
+      <text x="590" y="364" fill="#34d399" font-size="11" font-family="monospace" font-weight="600">  0000 0110  (= 6)  → 桶[6]</text>
+    </svg>
+  </div>
+
+  <!-- Diagram 2: Red-Black Tree -->
+  <div class="card">
+    <div class="card-title">🌲 红黑树五条铁律 & 为什么不用 AVL 树</div>
+    <svg viewBox="0 0 1100 380">
+      <rect width="1100" height="380" fill="#0f172a" rx="8"/>
+      <pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M40 0L0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+      </pattern>
+      <rect width="1100" height="380" fill="url(#grid2)"/>
+
+      <!-- Tree -->
+      <!-- Root -->
+      <circle cx="200" cy="60" r="18" fill="#1a1a1a" stroke="#fff" stroke-width="2.5"/>
+      <text x="200" y="65" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">●</text>
+
+      <!-- Level 1 -->
+      <line x1="186" y1="76" x2="130" y2="130" stroke="#64748b" stroke-width="1.5"/>
+      <circle cx="120" cy="140" r="18" fill="#cc0000" stroke="#ff4444" stroke-width="2.5"/>
+      <text x="120" y="145" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">○</text>
+
+      <line x1="214" y1="76" x2="270" y2="130" stroke="#64748b" stroke-width="1.5"/>
+      <circle cx="280" cy="140" r="18" fill="#cc0000" stroke="#ff4444" stroke-width="2.5"/>
+      <text x="280" y="145" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">○</text>
+
+      <!-- Level 2 -->
+      <line x1="108" y1="156" x2="80" y2="210" stroke="#64748b" stroke-width="1"/>
+      <circle cx="75" cy="220" r="16" fill="#1a1a1a" stroke="#888" stroke-width="2"/>
+      <text x="75" y="225" text-anchor="middle" fill="#94a3b8" font-size="11">●</text>
+
+      <line x1="132" y1="156" x2="160" y2="210" stroke="#64748b" stroke-width="1"/>
+      <circle cx="165" cy="220" r="16" fill="#1a1a1a" stroke="#888" stroke-width="2"/>
+      <text x="165" y="225" text-anchor="middle" fill="#94a3b8" font-size="11">●</text>
+
+      <line x1="268" y1="156" x2="240" y2="210" stroke="#64748b" stroke-width="1"/>
+      <circle cx="235" cy="220" r="16" fill="#1a1a1a" stroke="#888" stroke-width="2"/>
+      <text x="235" y="225" text-anchor="middle" fill="#94a3b8" font-size="11">●</text>
+
+      <line x1="292" y1="156" x2="320" y2="210" stroke="#64748b" stroke-width="1"/>
+      <circle cx="325" cy="220" r="16" fill="#1a1a1a" stroke="#888" stroke-width="2"/>
+      <text x="325" y="225" text-anchor="middle" fill="#94a3b8" font-size="11">●</text>
+
+      <!-- NIL leaves -->
+      <text x="60" y="265" text-anchor="middle" fill="#64748b" font-size="9">NIL</text>
+      <text x="90" y="265" text-anchor="middle" fill="#64748b" font-size="9">NIL</text>
+      <text x="150" y="265" text-anchor="middle" fill="#64748b" font-size="9">NIL</text>
+      <text x="180" y="265" text-anchor="middle" fill="#64748b" font-size="9">NIL</text>
+      <text x="220" y="265" text-anchor="middle" fill="#64748b" font-size="9">NIL</text>
+      <text x="250" y="265" text-anchor="middle" fill="#64748b" font-size="9">NIL</text>
+      <text x="310" y="265" text-anchor="middle" fill="#64748b" font-size="9">NIL</text>
+      <text x="340" y="265" text-anchor="middle" fill="#64748b" font-size="9">NIL</text>
+
+      <!-- Rules -->
+      <rect x="450" y="30" width="620" height="210" rx="6" fill="rgba(76,29,149,0.15)" stroke="#a78bfa" stroke-width="1"/>
+
+      <circle cx="475" cy="58" r="10" fill="#4fc3f7"/>
+      <text x="475" y="62" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">1</text>
+      <text x="495" y="63" fill="#e2e8f0" font-size="11">节点要么红 ○，要么黑 ●</text>
+
+      <circle cx="475" cy="85" r="10" fill="#4fc3f7"/>
+      <text x="475" y="89" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">2</text>
+      <text x="495" y="90" fill="#e2e8f0" font-size="11">根节点永远是黑色 ●</text>
+
+      <circle cx="475" cy="112" r="10" fill="#4fc3f7"/>
+      <text x="475" y="116" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">3</text>
+      <text x="495" y="117" fill="#e2e8f0" font-size="11">红色节点的两个子节点必须都是黑色（红不连红）</text>
+
+      <circle cx="475" cy="139" r="10" fill="#4fc3f7"/>
+      <text x="475" y="143" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">4</text>
+      <text x="495" y="144" fill="#e2e8f0" font-size="11">任意节点到所有 NIL 叶子的路径上，黑色节点数量相等</text>
+
+      <circle cx="475" cy="166" r="10" fill="#4fc3f7"/>
+      <text x="475" y="170" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">5</text>
+      <text x="495" y="171" fill="#e2e8f0" font-size="11">每个 NIL 叶子节点视为黑色</text>
+
+      <!-- Comparison -->
+      <text x="475" y="205" fill="#94a3b8" font-size="10">HashMap 为什么选红黑树不选 AVL？</text>
+      <text x="475" y="225" fill="#e2e8f0" font-size="10">红黑树插入/删除最多旋转 3 次 · AVL 更严格平衡但维护成本高 · HashMap 增删频繁 → 红黑树更合适</text>
+
+      <!-- Performance table -->
+      <rect x="450" y="265" width="620" height="100" rx="6" fill="rgba(30,41,59,0.5)" stroke="#334155" stroke-width="1"/>
+      <text x="760" y="292" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="600">查找性能对比</text>
+      <text x="490" y="318" fill="#94a3b8" font-size="10">链表长度=4:  O(4) = 4 次遍历  ·  红黑树: log₂4 = 2 次  → 差距不大</text>
+      <text x="490" y="340" fill="#94a3b8" font-size="10">链表长度=8:  O(8) = 8 次遍历  ·  红黑树: log₂8 = 3 次  → 差距明显 ✅</text>
+      <text x="490" y="362" fill="#94a3b8" font-size="10">链表长度=64: O(64)=64 次遍历  ·  红黑树: log₂64=6 次  → 巨大差距 🔥</text>
+    </svg>
+  </div>
+</div>
+</body>
+</html>

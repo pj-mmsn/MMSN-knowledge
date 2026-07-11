@@ -185,6 +185,8 @@
   },
   "active": "ff5083ba0a0bb8af",
   "lastOpenFiles": [
+    "01-Projects/图解-锁升级与MarkWord.html",
+    "01-Projects/图解-HashMap结构.html",
     "01-Projects/8周Agent学习计划.md",
     "01-Projects/面试突击手册-Java+AI.md",
     "03-Resources/JavaGuide/README.md",
@@ -210,7 +212,6 @@
     "02-Areas/AI与Agent/02-RAG与Prompt/RAG系统架构设计.md",
     "02-Areas/AI与Agent/02-RAG与Prompt/RAG检索增强生成.md",
     "02-Areas/AI与Agent/01-核心概念/工具调用.md",
-    "02-Areas/AI与Agent/01-核心概念/记忆系统.md",
     "02-Areas/AI与Agent/05-实战与运维",
     "02-Areas/AI与Agent/04-Java-AI开发",
     "02-Areas/AI与Agent/03-Python-AI开发",
@@ -231,7 +232,6 @@
     "03-Resources/JavaGuide/docs/system-design/framework/spring/images/spring-transaction",
     "03-Resources/JavaGuide/docs/system-design/framework/spring/images/spring-annotations",
     "03-Resources/JavaGuide/docs/system-design/framework/spring/images/mvc-model2.drawio",
-    "03-Resources/JavaGuide/docs/system-design/framework/spring/images/mvc-mode1.drawio",
     "未命名.canvas"
   ]
 }
