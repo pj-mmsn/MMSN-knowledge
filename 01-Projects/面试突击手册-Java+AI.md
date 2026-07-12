@@ -96,6 +96,27 @@
 | 行为面试 | [行为面试与软技能话术](02-Areas/Java/行为面试与软技能话术.md) | 离职原因/优缺点/STAR/期望薪资/反问5问 |
 | AI 加分 | [AI项目面试加分指南](02-Areas/Java/AI项目面试加分指南.md) | 三个项目STAR包装+模型速查+追问精准回答 |
 
+---
+
+## 🔥 全栈开发路线（Vue3 + TypeScript）
+
+> 面试全栈岗位时的前端知识储备。
+
+| 知识点 | 知识库笔记 | 一句话 |
+|--------|-----------|--------|
+| 全栈前端基础 | [全栈开发面试基础-Vue3+TS](02-Areas/Java/全栈开发面试基础-Vue3+TS.md) | Vue3 响应式+组件通信+TS+HTTP/REST |
+
+## 🔥 Python/Agent 开发路线
+
+> 面试 Python Agent 开发岗位时的专业知识储备。
+
+| 知识点 | 知识库笔记 | 一句话 |
+|--------|-----------|--------|
+| Agent 框架选型 | [Python Agent 开发实战-框架对比与选型](02-Areas/Python/Python%20Agent%20开发实战-框架对比与选型.md) | LangChain vs LangGraph vs CrewAI 代码对比 |
+| FastAPI 实战 | [FastAPI 后端开发实战](02-Areas/Python/FastAPI%20后端开发实战.md) | async/SSE/Pydantic/部署 |
+| 向量数据库 | [向量数据库实战-Chroma与pgvector](02-Areas/AI与Agent/向量数据库实战-Chroma与pgvector.md) | Chroma/pgvector+混合检索+Rerank |
+| Prompt 工程 | [Prompt 工程进阶](02-Areas/AI与Agent/Prompt%20工程进阶.md) | 五层结构+Json容错+版本管理 |
+
 ## AI / Agent ★★★（加分项）
 
 | 知识点        | 知识库笔记                                                          | 一句话                                  |
