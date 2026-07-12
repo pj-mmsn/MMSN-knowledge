@@ -17,6 +17,7 @@
 | AQS | [AQS](02-Areas/Java/AQS.md) | state + CLH 队列，公平 vs 非公平 |
 | CAS | [CAS与Atomic](02-Areas/Java/CAS与Atomic.md) | 乐观锁 + ABA + 自旋 |
 | ThreadLocal | [ThreadLocal](02-Areas/Java/ThreadLocal.md) | 线程隔离 + 内存泄漏 |
+| Java 进阶 | [String/Stream/Optional/CompletableFuture](02-Areas/Java/Java%20进阶核心-String-Stream-Optional-CompletableFuture.md) | String 不可变+函数式+异步编排+Java21 |
 
 ## JVM（必问 ★★★★）
 
@@ -81,6 +82,8 @@
 | 项目全流程 | [Java项目开发全流程实战](02-Areas/Java/Java项目开发全流程实战.md) | 需求→设计→编码→测试→上线→监控 |
 | 算法基础 | [Java面试算法基础](02-Areas/Java/Java面试算法基础.md) | 快排/归并/二分/链表/二叉树+思想 |
 | 线上排查 | [线上问题排查实战手册](02-Areas/Java/线上问题排查实战手册.md) | CPU飙高/OOM/慢接口/死锁/慢SQL/Redis/MQ积压 |
+| 微服务 | [微服务与Spring Cloud基础](02-Areas/Java/微服务与Spring%20Cloud基础.md) | Nacos/Feign/Sentinel/Seata |
+| 测试+日志 | [单元测试与日志框架基础](02-Areas/Java/单元测试与日志框架基础.md) | JUnit5+Mockito+SLF4J+Logback |
 
 ## DevOps + 安全 ★★★
 
@@ -95,6 +98,7 @@
 |--------|-----------|--------|
 | 行为面试 | [行为面试与软技能话术](02-Areas/Java/行为面试与软技能话术.md) | 离职原因/优缺点/STAR/期望薪资/反问5问 |
 | AI 加分 | [AI项目面试加分指南](02-Areas/Java/AI项目面试加分指南.md) | 三个项目STAR包装+模型速查+追问精准回答 |
+| 面试日清单 | [面试当天准备清单](02-Areas/Java/面试当天准备清单.md) | 时间线+回答结构+陷阱应对 |
 
 ---
 
