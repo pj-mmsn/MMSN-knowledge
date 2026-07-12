@@ -82,18 +82,32 @@
 | 算法基础 | [Java面试算法基础](02-Areas/Java/Java面试算法基础.md) | 快排/归并/二分/链表/二叉树+思想 |
 | 线上排查 | [线上问题排查实战手册](02-Areas/Java/线上问题排查实战手册.md) | CPU飙高/OOM/慢接口/死锁/慢SQL/Redis/MQ积压 |
 
-## AI / Agent ★★★（加分项）
+## DevOps + 安全 ★★★
 
 | 知识点 | 知识库笔记 | 一句话 |
 |--------|-----------|--------|
-| Agent 核心概念 | [Agent核心概念](02-Areas/AI与Agent/01-核心概念/Agent核心概念.md) | LLM + Memory + Tools + Planning |
-| Agent 架构模式 | [Agent架构模式全景](02-Areas/AI与Agent/01-核心概念/Agent架构模式全景.md) | ReAct / Plan-Execute / Reflection |
-| 规划与推理 | [规划与推理](02-Areas/AI与Agent/01-核心概念/规划与推理.md) | CoT + Task Decomposition |
-| 记忆系统 | [记忆系统](02-Areas/AI与Agent/01-核心概念/记忆系统.md) | 短期/长期/向量数据库 |
-| 工具调用 | [工具调用](02-Areas/AI与Agent/01-核心概念/工具调用.md) | Function Calling 原理 |
-| RAG | [RAG检索增强生成](02-Areas/AI与Agent/02-RAG与Prompt/RAG检索增强生成.md) | 检索增强生成全流程 |
-| Prompt 工程 | [Prompt工程](02-Areas/AI与Agent/02-RAG与Prompt/Prompt工程.md) | System Prompt + CoT |
-| Spring AI | [Spring AI实战](02-Areas/AI与Agent/04-Java-AI开发/Spring%20AI实战.md) | ChatClient + Embedding + VectorStore |
+| DevOps | [DevOps 部署运维基础](02-Areas/Java/DevOps%20部署运维基础.md) | Git/Docker/Linux/CI-CD/Nginx |
+| 安全 | [Web 安全基础](02-Areas/Java/Web%20安全基础.md) | SQL注入/XSS/CSRF/JWT/OAuth2 |
+
+## 软技能 ★★★★★
+
+| 知识点 | 知识库笔记 | 一句话 |
+|--------|-----------|--------|
+| 行为面试 | [行为面试与软技能话术](02-Areas/Java/行为面试与软技能话术.md) | 离职原因/优缺点/STAR/期望薪资/反问5问 |
+| AI 加分 | [AI项目面试加分指南](02-Areas/Java/AI项目面试加分指南.md) | 三个项目STAR包装+模型速查+追问精准回答 |
+
+## AI / Agent ★★★（加分项）
+
+| 知识点        | 知识库笔记                                                          | 一句话                                  |
+| ---------- | -------------------------------------------------------------- | ------------------------------------ |
+| Agent 核心概念 | [Agent核心概念](02-Areas/AI与Agent/01-核心概念/Agent核心概念.md)            | LLM + Memory + Tools + Planning      |
+| Agent 架构模式 | [Agent架构模式全景](02-Areas/AI与Agent/01-核心概念/Agent架构模式全景.md)        | ReAct / Plan-Execute / Reflection    |
+| 规划与推理      | [规划与推理](02-Areas/AI与Agent/01-核心概念/规划与推理.md)                    | CoT + Task Decomposition             |
+| 记忆系统       | [记忆系统](02-Areas/AI与Agent/01-核心概念/记忆系统.md)                      | 短期/长期/向量数据库                          |
+| 工具调用       | [工具调用](02-Areas/AI与Agent/01-核心概念/工具调用.md)                      | Function Calling 原理                  |
+| RAG        | [RAG检索增强生成](02-Areas/AI与Agent/02-RAG与Prompt/RAG检索增强生成.md)      | 检索增强生成全流程                            |
+| Prompt 工程  | [Prompt工程](02-Areas/AI与Agent/02-RAG与Prompt/Prompt工程.md)        | System Prompt + CoT                  |
+| Spring AI  | [Spring AI实战](02-Areas/AI与Agent/04-Java-AI开发/Spring%20AI实战.md) | ChatClient + Embedding + VectorStore |
 
 ---
 
