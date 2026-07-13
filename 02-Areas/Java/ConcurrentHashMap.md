@@ -11,6 +11,8 @@ difficulty: 深入
 
 > **一句话**:HashMap 线程不安全,HashTable 全表锁太慢;ConcurrentHashMap 用分段锁/CAS+ synchronized 锁单个桶,实现高并发安全。
 
+> 📌 本文涉及：[CAS与Atomic](CAS与Atomic.md) · [红黑树原理](红黑树原理详解.md) · [synchronized](synchronized与Lock.md) · [HashMap](HashMap.md)
+
 ## 核心概念
 
 ### JDK 1.7 vs 1.8+ 的变化

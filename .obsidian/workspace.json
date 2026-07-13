@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01-Projects/面试突击手册-Java+AI.md",
+                "file": "02-Areas/Java/HashMap.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "面试突击手册-Java+AI"
+              "title": "HashMap"
             }
           }
         ]
@@ -185,6 +185,9 @@
   },
   "active": "15653ccb8c61467b",
   "lastOpenFiles": [
+    "02-Areas/Java/红黑树原理详解.md",
+    "02-Areas/Java/位运算基础与实战.md",
+    "02-Areas/Java/B+Tree 索引原理详解.md",
     "01-Projects/面试突击手册-Java+AI.md",
     "01-Projects/8周Agent学习计划.md",
     "02-Areas/Java/Java 进阶核心-String-Stream-Optional-CompletableFuture.md",
@@ -209,9 +212,6 @@
     "未命名.base",
     "2026-07-12.md",
     "02-Areas/Java/代理.md",
-    "02-Areas/Java/分布式系统设计.md",
-    "02-Areas/Java/计算机网络基础.md",
-    "02-Areas/Java/消息队列 MQ.md",
     "01-Projects/图解-锁升级与MarkWord.html",
     "01-Projects/图解-HashMap结构.html",
     "02-Areas/AI与Agent/05-实战与运维",

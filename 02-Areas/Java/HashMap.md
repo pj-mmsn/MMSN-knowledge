@@ -11,6 +11,8 @@ difficulty: 深入
 
 > **一句话**:HashMap 用"数组 + 链表 + 红黑树"存键值对,通过 hash 定位槽位,用拉链法解决冲突,是 Java 里用得最多的 Map 实现。
 
+> 📌 本文涉及：[红黑树原理](红黑树原理详解.md) · [位运算实战](位运算基础与实战.md) · [ConcurrentHashMap](ConcurrentHashMap.md)
+
 ## 核心概念
 
 ### 数据结构演进

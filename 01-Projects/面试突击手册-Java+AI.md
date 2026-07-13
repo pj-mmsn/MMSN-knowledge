@@ -81,6 +81,9 @@
 |--------|-----------|--------|
 | 项目全流程 | [Java项目开发全流程实战](02-Areas/Java/Java项目开发全流程实战.md) | 需求→设计→编码→测试→上线→监控 |
 | 算法基础 | [Java面试算法基础](02-Areas/Java/Java面试算法基础.md) | 快排/归并/二分/链表/二叉树+思想 |
+| 红黑树 | [红黑树原理详解](02-Areas/Java/红黑树原理详解.md) | 五条铁律+旋转+变色+HashMap/TreeMap应用 |
+| 位运算 | [位运算基础与实战](02-Areas/Java/位运算基础与实战.md) | HashMap定位/线程池CTL/权限掩码 |
+| B+Tree | [B+Tree 索引原理详解](02-Areas/Java/B+Tree%20索引原理详解.md) | 矮胖设计+聚簇vs二级+vs红黑树/Hash |
 | 线上排查 | [线上问题排查实战手册](02-Areas/Java/线上问题排查实战手册.md) | CPU飙高/OOM/慢接口/死锁/慢SQL/Redis/MQ积压 |
 | 微服务 | [微服务与Spring Cloud基础](02-Areas/Java/微服务与Spring%20Cloud基础.md) | Nacos/Feign/Sentinel/Seata |
 | 测试+日志 | [单元测试与日志框架基础](02-Areas/Java/单元测试与日志框架基础.md) | JUnit5+Mockito+SLF4J+Logback |
