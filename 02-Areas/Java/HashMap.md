@@ -211,7 +211,7 @@ public class HashMapUnsafeDemo {
 ...
 ```
 
-> **结论**:并发用 `HashMap` 会丢数据甚至死循环(1.7)。多线程场景用 `ConcurrentHashMap`(详见 [并发篇](../03-并发))。
+> **结论**:并发用 `HashMap` 会丢数据甚至死循环(1.7)。多线程场景用 `ConcurrentHashMap`(详见 [ConcurrentHashMap](ConcurrentHashMap.md))。
 
 ## 常见误区 / 面试点
 
