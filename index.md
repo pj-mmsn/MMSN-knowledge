@@ -17,9 +17,9 @@
 
 **RAG与Prompt** — [RAG检索增强生成](02-Areas/AI与Agent/02-RAG与Prompt/RAG检索增强生成.md) · [RAG系统架构设计](02-Areas/AI与Agent/02-RAG与Prompt/RAG系统架构设计.md) · [Prompt工程](02-Areas/AI与Agent/02-RAG与Prompt/Prompt工程.md)
 
-**Python AI开发** — [Python AI开发生态概览](02-Areas/AI与Agent/Python%20AI开发生态概览.md) · [LangChain实战](02-Areas/AI与Agent/03-Python-AI开发/LangChain实战.md) · [LangGraph状态机](02-Areas/AI与Agent/03-Python-AI开发/LangGraph状态机.md) · [Multi-Agent多智能体](02-Areas/AI与Agent/03-Python-AI开发/Multi-Agent多智能体.md) · [框架对比与选型](02-Areas/AI与Agent/03-Python-AI开发/框架对比与选型.md)
+**Python AI开发** — [Python AI开发生态概览](02-Areas/AI与Agent/03-Python-AI开发/Python AI开发生态概览.md) · [LangChain实战](02-Areas/AI与Agent/03-Python-AI开发/LangChain实战.md) · [LangGraph状态机](02-Areas/AI与Agent/03-Python-AI开发/LangGraph状态机.md) · [Multi-Agent多智能体](02-Areas/AI与Agent/03-Python-AI开发/Multi-Agent多智能体.md) · [框架对比与选型](02-Areas/AI与Agent/03-Python-AI开发/框架对比与选型.md)
 
-**Java AI开发** — [Java AI开发生态概览](02-Areas/AI与Agent/Java%20AI开发生态概览.md) · [Spring AI实战](02-Areas/AI与Agent/Spring%20AI实战.md) · [Java LLM API调用](02-Areas/AI与Agent/Java%20LLM%20API调用.md) · [Java向量数据库与RAG](02-Areas/AI与Agent/04-Java-AI开发/Java向量数据库与RAG.md) · [Java AI项目实战模式](02-Areas/AI与Agent/Java%20AI项目实战模式.md)
+**Java AI开发** — [Java AI开发生态概览](02-Areas/AI与Agent/04-Java-AI开发/Java AI开发生态概览.md) · [Spring AI实战](02-Areas/AI与Agent/04-Java-AI开发/Spring AI实战.md) · [Java LLM API调用](02-Areas/AI与Agent/04-Java-AI开发/Java LLM API调用.md) · [Java向量数据库与RAG](02-Areas/AI与Agent/04-Java-AI开发/Java向量数据库与RAG.md) · [Java AI项目实战模式](02-Areas/AI与Agent/04-Java-AI开发/Java AI项目实战模式.md)
 
 **实战与运维** — [部署与运维](02-Areas/AI与Agent/05-实战与运维/部署与运维.md) · [Agent开发环境搭建指南](02-Areas/AI与Agent/05-实战与运维/Agent开发环境搭建指南.md) · [学习路径与转型指南](02-Areas/AI与Agent/05-实战与运维/学习路径与转型指南.md) · [常见问题排错](02-Areas/AI与Agent/05-实战与运维/常见问题排错.md) · [记忆系统设计实战](02-Areas/AI与Agent/05-实战与运维/记忆系统设计实战.md) · [知识与代码双向映射](02-Areas/AI与Agent/05-实战与运维/知识与代码双向映射.md)
 
@@ -69,7 +69,7 @@
 
 ## 📝 05-经验日志 — 踩坑记录
 
-- [DeepSeek API双协议调用](05-经验日志/DeepSeek%20API双协议调用.md) — OpenAI vs Anthropic 协议，三大坑
+- [DeepSeek API双协议调用](05-经验日志/DeepSeek API双协议调用.md) — OpenAI vs Anthropic 协议，三大坑
 - [Prompt工程实战](05-经验日志/Prompt工程实战.md) — AI 小说家项目 5 条核心经验
 - [RAG企业级落地方案](05-经验日志/RAG企业级落地方案.md) — RAG 落地实践
 - [实战场景与解决方案](05-经验日志/实战场景与解决方案.md) — 14 种 Agent 开发场景速查

@@ -13,7 +13,7 @@
 - **Agent 实战** (1)
   - [实战场景与解决方案](实战场景与解决方案.md) — 14 种 Agent 开发场景速查
 - **DeepSeek API** (1)
-  - [DeepSeek API双协议调用](DeepSeek%20API双协议调用.md) — OpenAI vs Anthropic 端点、格式、三大坑
+  - [DeepSeek API双协议调用](DeepSeek API双协议调用.md) — OpenAI vs Anthropic 端点、格式、三大坑
 - **Spring** (1)
   - [启动报错](spring/启动报错.md) — Spring Boot DataSource 配置问题
 

@@ -40,21 +40,21 @@
 ## Spring
 
 - [IoC与AOP](IoC与AOP.md) — Bean生命周期+三级缓存+动态代理
-- [Spring Boot 自动配置](Spring%20Boot%20自动配置.md) — @EnableAutoConfiguration+条件装配
+- [Spring Boot 自动配置](Spring Boot 自动配置.md) — @EnableAutoConfiguration+条件装配
 - [Spring事务传播机制](Spring事务传播机制.md) — 7种传播行为+失效三场景
-- [Spring MVC 请求流程](Spring%20MVC%20请求流程.md) — DispatcherServlet→Controller完整链路
+- [Spring MVC 请求流程](Spring MVC 请求流程.md) — DispatcherServlet→Controller完整链路
 
 ## 数据库
 
 - [索引](索引.md) — MySQL B+Tree 索引原理与优化
-- [MySQL 事务与锁](MySQL%20事务与锁.md) — ACID+隔离级别+MVCC+行锁/间隙锁
+- [MySQL 事务与锁](MySQL 事务与锁.md) — ACID+隔离级别+MVCC+行锁/间隙锁
 - [持久化](持久化.md) — Redis RDB、AOF 持久化机制
-- [Redis 缓存策略](Redis%20缓存策略.md) — 穿透/击穿/雪崩+分布式锁
+- [Redis 缓存策略](Redis 缓存策略.md) — 穿透/击穿/雪崩+分布式锁
 
 ## 中间件
 
-- [MyBatis 核心原理](MyBatis%20核心原理.md) — #{} vs ${}+一二级缓存
-- [消息队列 MQ](消息队列%20MQ.md) — Kafka+削峰/解耦/异步
+- [MyBatis 核心原理](MyBatis 核心原理.md) — #{} vs ${}+一二级缓存
+- [消息队列 MQ](消息队列 MQ.md) — Kafka+削峰/解耦/异步
 
 ## 分布式
 

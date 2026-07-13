@@ -180,4 +180,4 @@ System.gc();  // 建议 Full GC(不保证立即执行)
 
 - JavaGuide: `docs/java/jvm/jvm-garbage-collection.md`
 - JavaGuide: `docs/java/jvm/jvm-parameters-intro.md`
-- 相关: [JVM 内存结构](../04-JVM/内存结构.md)(堆的分代结构)
+- 相关: [JVM 内存结构](内存结构.md)(堆的分代结构)

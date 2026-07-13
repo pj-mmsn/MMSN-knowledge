@@ -20,7 +20,7 @@
 
 ## 03-Python AI开发
 
-- [Python AI开发生态概览](03-Python-AI开发/Python%20AI开发生态概览.md) — Python AI 生态全景
+- [Python AI开发生态概览](03-Python-AI开发/Python AI开发生态概览.md) — Python AI 生态全景
 - [LangChain实战](03-Python-AI开发/LangChain实战.md) — Chain、Tool、Agent 实战
 - [LangGraph状态机](03-Python-AI开发/LangGraph状态机.md) — 状态机式 Agent 开发
 - [Multi-Agent多智能体](03-Python-AI开发/Multi-Agent多智能体.md) — AutoGen、CrewAI 多Agent协作
@@ -28,11 +28,11 @@
 
 ## 04-Java AI开发
 
-- [Java AI开发生态概览](04-Java-AI开发/Java%20AI开发生态概览.md) — Java AI 生态全景
-- [Spring AI实战](04-Java-AI开发/Spring%20AI实战.md) — Spring Boot + LLM + Function Calling
-- [Java LLM API调用](04-Java-AI开发/Java%20LLM%20API调用.md) — OkHttp + DeepSeek 原生调用
+- [Java AI开发生态概览](04-Java-AI开发/Java AI开发生态概览.md) — Java AI 生态全景
+- [Spring AI实战](04-Java-AI开发/Spring AI实战.md) — Spring Boot + LLM + Function Calling
+- [Java LLM API调用](04-Java-AI开发/Java LLM API调用.md) — OkHttp + DeepSeek 原生调用
 - [Java向量数据库与RAG](04-Java-AI开发/Java向量数据库与RAG.md) — Chroma + JVector + Spring AI
-- [Java AI项目实战模式](04-Java-AI开发/Java%20AI项目实战模式.md) — SSE、异步、重试、部署模式
+- [Java AI项目实战模式](04-Java-AI开发/Java AI项目实战模式.md) — SSE、异步、重试、部署模式
 
 ## 05-实战与运维
 
