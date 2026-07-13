@@ -49,7 +49,7 @@ graph TB
         T0 --> I15["下标15"]
 
         I1 --> N1["Node(k1,v1)"]
-        N1 --> N2["Node(k2,v2)"]  <!-- hash冲突,拉链 -->
+        N1 --> N2["Node(k2,v2)"]  %% hash冲突,拉链
         N2 --> N3["... → 树化(≥8)"]
 
         I15 --> T15a["TreeNode<br/>红黑树节点"]
